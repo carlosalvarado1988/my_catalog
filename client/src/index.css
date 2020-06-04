@@ -1,0 +1,111 @@
+/* Global rules */
+
+:root {
+  font-size: 62.5%;
+  font-family: Arial, Helvetica, sans-serif;
+  --bg-color: #282c34;
+  --text-color: white;
+  --bar-height-web: 70px;
+  --bar-height-web-mobile: 50px;
+  --text-size-web: 2rem;
+  --text-size-mobile: 1rem;
+  --max-width-content: 900px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+p {
+  font-size: var(--text-size-web);
+  margin: 5px 0;
+}
+
+h1 {
+  font-size: 4.5rem;
+  margin: 10px 0;
+}
+h2 {
+  font-size: 4rem;
+  margin: 10px 0;
+}
+h3 {
+  font-size: 3.5rem;
+  margin: 10px 0;
+}
+h4 {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+h5 {
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+
+.grid-items-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 1rem;
+}
+.grid-item {
+  width: 100%;
+  padding: 30px;
+  border: 0.3px solid lightcoral;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.grid-item:hover,
+.grid-item:focus {
+  border-color: lightgreen;
+  background-color: #272c36;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  p {
+    font-size: var(--text-size-mobile);
+    margin: 3px 0;
+  }
+  h1 {
+    font-size: 2.3rem;
+    margin: 10px 0;
+  }
+  h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+  h3 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+  }
+  h4 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+  h5 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  .grid-items-list {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    grid-gap: 0.5rem;
+  }
+  .grid-item {
+    padding: 10px;
+  }
+}
