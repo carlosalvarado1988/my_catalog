@@ -1,0 +1,36 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["node_modules", "./src/graphql/index.tsx"]
+  },
+  "rules": {
+    "indent": [true, "spaces", 4],
+    "quotemark": [true, "single", "jsx-double", "avoid-escape"],
+    "semicolon": [true, "never"],
+    "ordered-imports": true,
+    "object-literal-key-quotes": [true, "as-needed"],
+    "object-literal-sort-keys": false,
+    "interface-name": false,
+    "no-empty-interface": false,
+    "no-console": false,
+    "no-namespace": false,
+    "no-unused-expression": [true, "allow-tagged-template"],
+    "no-unused-variable": [
+      true,
+      {
+        "ignore-pattern": "React"
+      }
+    ],
+    "no-var-requires": false,
+    "prefer-object-spread": true,
+    "static-this": true,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
+    "typedef": [true, "call-signature", "property-declaration"]
+  }
+}

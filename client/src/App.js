@@ -1,8 +1,8 @@
 import React from "react";
 
-import { HeaderContainer } from "./components/HeaderContainer";
-import { PageContainer } from "./components/PageContainer";
-import { FooterContainer } from "./components/FooterContainer";
+import { HeaderContainer } from "./layout/shared/HeaderContainer";
+import { PageContainer } from "./layout/shared/PageContainer";
+import { FooterContainer } from "./layout/shared/FooterContainer";
 
 function App() {
   return (
