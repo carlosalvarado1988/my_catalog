@@ -1,0 +1,27 @@
+# misc
+/.helm/
+.*
+jest.config.js
+nginx.conf
+
+# generated
+/.cache/
+/.coverage/
+/.dev/
+/.dist/
+/coverage/
+/dist/
+/gen/api/dist/
+/dist-dev/
+/functions/
+/public/
+/storybook-static/
+node_modules
+
+# IDE Stuff
+/.code-workspace/
+/.idea/
+/.next/
+/.project/
+/.vscode/
+/.settings/

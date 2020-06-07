@@ -1,19 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
-import { SignIn } from "../dashboard-app/pages/SignIn";
-import { CategoryList } from "../client-app/pages/CategoryList";
-import { ProductsCategoryList } from "../client-app/pages/ProductsCategoryList";
-import { OrderDetails } from "../client-app/pages/OrderDetails";
-import { DeliveryOrder } from "../client-app/pages/DeliveryOrder";
+import { Routes } from "./Routes";
 
 export const PageContainer = () => (
   <Wrapper>
-    <SignIn />
-    <CategoryList />
-    <ProductsCategoryList />
-    <OrderDetails />
-    <DeliveryOrder />
+    <Routes />
   </Wrapper>
 );
 
