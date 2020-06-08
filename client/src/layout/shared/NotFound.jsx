@@ -12,6 +12,6 @@ export const NotFound = () => (
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  justify-items: center;
+  align-items: center;
   height: 100%;
 `;

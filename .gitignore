@@ -1,1 +1,5 @@
 node_modules
+
+# Client app ignores
+client/node_modules
+client/build
