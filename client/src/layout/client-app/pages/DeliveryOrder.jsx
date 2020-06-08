@@ -1,31 +1,34 @@
 import React from "react";
 import styled from "styled-components";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 
 export const DeliveryOrder = () => (
   <Wrapper>
     <h1>Orden de Entrega</h1>
     <form className="grid-items-list">
       <div className="grid-item">
+        <CheckCircleTwoTone className="check-valid" twoToneColor="#52c41a" />
         <h4>Cliente:</h4>
         <div>
-          <label for="contact-name">Nombre:</label>
+          <label htmlFor="contact-name">Nombre:</label>
           <input id="contact-name" type="text" required></input>
         </div>
         <div>
-          <label for="contact-name">Apellidos:</label>
+          <label htmlFor="contact-name">Apellidos:</label>
           <input id="contact-name" type="text" required></input>
         </div>
         <div>
-          <label for="contact-phone">Telefono:</label>
+          <label htmlFor="contact-phone">Telefono:</label>
           <input id="contact-phone" type="text" required></input>
         </div>
       </div>
 
       <div className="grid-item">
+        <CheckCircleTwoTone className="check-valid" twoToneColor="#52c41a" />
         <h4>Fecha de entrega:</h4>
         <div>
-          <label>Dia:</label>
-          <input type="date" format="DD/MM/YYYY" required></input>
+          <label htmlFor="date">Dia:</label>
+          <input id="date" type="date" format="DD/MM/YYYY" required></input>
         </div>
         <div>
           <label>De:</label>
@@ -36,6 +39,7 @@ export const DeliveryOrder = () => (
       </div>
 
       <div className="grid-item">
+        <CheckCircleTwoTone className="check-valid" twoToneColor="#52c41a" />
         <h4>Lugar de entrega:</h4>
         <div>
           <label>Direccion:</label>
@@ -48,12 +52,13 @@ export const DeliveryOrder = () => (
       </div>
 
       <div className="grid-item">
+        <CheckCircleTwoTone className="check-valid" twoToneColor="#52c41a" />
         <h4>Pago:</h4>
         <div>
           <label>Metodo de pago:</label>
-          <select disabled>
-            <option selected>Pago a contra entrega</option>
-            <option>Tarjeta de credito</option>
+          <select defaultValue="cash">
+            <option value="cash">Pago a contra entrega</option>
+            <option value="cc">Tarjeta de credito</option>
           </select>
         </div>
       </div>
@@ -67,23 +72,19 @@ const Wrapper = styled.main`
   box-sizing: border-box;
   color: var(--text-color);
   font-size: var(--text-size-web);
-  /* .grid-items-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    grid-gap: 1rem;
-  } */
   .grid-item {
-    /* width: 100%;
-    padding: 30px;
-    border: 0.3px solid lightcoral;
-    border-radius: 5px;
-    box-sizing: border-box; */
     > h2 {
       margin: 0 0 5px;
     }
     > div {
       display: block;
     }
+  }
+
+  .check-valid {
+    position: relative;
+    float: right;
+    font-size: 3rem;
   }
 
   @media (max-width: 600px) {

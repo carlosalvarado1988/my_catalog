@@ -1,4 +1,5 @@
 /* Global and Shared rules */
+@import "~antd/dist/antd.css";
 
 :root {
   font-size: 62.5%;
