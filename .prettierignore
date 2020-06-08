@@ -17,6 +17,7 @@ nginx.conf
 /public/
 /storybook-static/
 node_modules
+/client/build
 
 # IDE Stuff
 /.code-workspace/

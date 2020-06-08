@@ -1,0 +1,15 @@
+{
+  "name": "catalog-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "server-install": "npm install"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
