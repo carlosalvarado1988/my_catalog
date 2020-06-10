@@ -6,7 +6,7 @@ export const HeaderContainer = () => (
     <div className="content">
       <div className="brand">
         <p className="pre-title">Catalog by:</p>
-        <p className="bizz-title">Baboon life</p>
+        <h2 className="bizz-title">Baboon life</h2>
       </div>
       <div className="order">
         <button>Carrito</button>
@@ -33,7 +33,6 @@ const Wrapper = styled.header`
     max-width: var(--max-width-content);
     margin: 0 auto;
     padding: 15px 30px;
-    color: lightcyan;
     box-sizing: border-box;
   }
 

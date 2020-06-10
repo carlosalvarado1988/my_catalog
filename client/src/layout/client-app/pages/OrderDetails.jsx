@@ -65,7 +65,7 @@ const Wrapper = styled.div`
   min-height: 100%;
   padding: 10px 0;
   box-sizing: border-box;
-  color: var(--text-color);
+  /* color: var(--text-color); */
   .item-row {
     display: flex;
     justify-content: space-between;

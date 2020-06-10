@@ -33,9 +33,11 @@ export const CategoryList = () => (
     <div className="grid-items-list">
       {categories.map((category) => (
         <section className="grid-item">
-          <h5 className="count">{category.products_count}</h5>
-          <h3>{category.category_name}</h3>
-          <p>{category.category_description}</p>
+          <div className="card">
+            <h5 className="count">{category.products_count}</h5>
+            <h3>{category.category_name}</h3>
+            <p>{category.category_description}</p>
+          </div>
         </section>
       ))}
     </div>

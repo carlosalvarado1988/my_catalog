@@ -1,11 +1,19 @@
 /* Global and Shared rules */
-@import "~antd/dist/antd.css";
+/* @import "~antd/dist/antd.css"; */
+
+@import "~antd/dist/antd.dark.css";
+/* --bg-color: #282c34; --card-color: #282c34; */
+
+/* @import "~antd/dist/antd.compact.css"; */
+/* --bg-color: #eee; --card-color: #fff; */
 
 :root {
   font-size: 62.5%;
   font-family: Arial, Helvetica, sans-serif;
-  --bg-color: #282c34;
-  --text-color: white;
+  --bg-color: #1f1b24;
+  --card-color: #282c34;
+  /* --bg-color: #eee;
+  --card-color: #fff; */
   --bar-height-web: 70px;
   --bar-height-web-mobile: 50px;
   --text-size-web: 2rem;
@@ -16,7 +24,6 @@
 body {
   margin: 0;
   padding: 0;
-  color: var(--text-color);
   background-color: var(--bg-color);
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -60,21 +67,22 @@ h5 {
 .grid-items-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-gap: 1rem;
+  grid-gap: 3rem;
 }
 .grid-item {
   width: 100%;
-  padding: 30px;
-  border: 0.3px solid lightcoral;
   border-radius: 5px;
   box-sizing: border-box;
 }
-
-.grid-item:hover,
-.grid-item:focus {
-  border-color: lightgreen;
-  background-color: #272c36;
+.card {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--card-color);
+}
+.card:hover,
+.card:focus {
   cursor: pointer;
+  box-shadow: 0px 1px 5px 1px lightcoral;
 }
 
 @media (max-width: 600px) {
@@ -105,8 +113,5 @@ h5 {
   .grid-items-list {
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     grid-gap: 0.5rem;
-  }
-  .grid-item {
-    padding: 10px;
   }
 }

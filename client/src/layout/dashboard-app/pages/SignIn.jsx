@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Button } from "antd";
 
 export const SignIn = () => (
   <Wrapper>
@@ -25,7 +26,9 @@ export const SignIn = () => (
 
       <div className="signup-box">
         <p className="label">Not a member yet?</p>
-        <button className="signup-button">Sign up</button>
+        <Button type="primary" className="signup-button">
+          Sign up
+        </Button>
       </div>
     </div>
   </Wrapper>
@@ -95,7 +98,6 @@ const Wrapper = styled.div`
     margin-top: 15px;
     height: 40px;
     font-size: 2rem;
-    border: 0;
   }
 
   @media (max-width: 600px) {

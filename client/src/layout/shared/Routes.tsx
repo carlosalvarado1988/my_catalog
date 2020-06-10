@@ -16,21 +16,21 @@ export const Routes = () => (
     <Route exact path={"/product-list"}>
       <ProductsCategoryList />
     </Route>
-    <Route exact path={"order-details"}>
+    <Route exact path={"/order-details"}>
       <OrderDetails />
     </Route>
     <Route exact path={"/delivery-order"}>
       <DeliveryOrder />
     </Route>
+    <Route path={`/signin`} exact>
+      <SignIn />
+    </Route>
     <Route
       path="/admin"
       render={({ match: { url } }) => (
         <>
-          <Route path={`${url}/signin`} exact>
-            <SignIn />
-          </Route>
           <Route path="*">
-            <Redirect to={`${url}/signin`} />
+            <Redirect to={`/signin`} />
           </Route>
         </>
       )}

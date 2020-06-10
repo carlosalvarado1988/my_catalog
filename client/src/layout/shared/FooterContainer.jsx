@@ -32,7 +32,7 @@ const Wrapper = styled.footer`
       height: 50px;
       float: right;
       background: red;
-      color: var(--text-color);
+      /* color: var(--text-color); */
       width: 90px;
       height: 40px;
       padding: 5px;

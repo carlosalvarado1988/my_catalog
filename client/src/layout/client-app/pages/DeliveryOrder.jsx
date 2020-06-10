@@ -70,7 +70,7 @@ const Wrapper = styled.main`
   min-height: 100%;
   padding: 10px 0;
   box-sizing: border-box;
-  color: var(--text-color);
+  /* color: var(--text-color); */
   font-size: var(--text-size-web);
   .grid-item {
     > h2 {
