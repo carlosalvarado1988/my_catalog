@@ -5,7 +5,6 @@ import cors from "cors";
 import authenticated from "./api/middlewares/authenticated";
 import routes from "./api/routes";
 
-const port = process.env.PORT;
 const app = express();
 
 app.use(cors());
@@ -15,8 +14,8 @@ app.use("/api/v1/admin", authenticated);
 
 routes(app);
 
-app.listen(port).on("listening", () => {
-  console.log(`🚀 server running on port: ${port}`);
+app.listen(process.env.PORT).on("listening", () => {
+  console.log(`🚀 server running on port: ${process.env.PORT}`);
 });
 
 export default app;

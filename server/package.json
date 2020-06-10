@@ -3,15 +3,20 @@
   "version": "1.0.0",
   "scripts": {
     "start": "nodemon --watch . --exec babel-node -- server.js",
-    "server-install": "npm install"
+    "server-install": "npm install",
+    "latest-migration": "dotenv cross-var knex migrate:latest --env %ENV%",
+    "rollback-migration": "dotenv cross-var knex migrate:rollback --env %ENV%"
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cross-var": "^1.1.0",
     "dotenv": "^8.2.0",
+    "dotenv-cli": "^3.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
     "moment": "^2.26.0",
     "pg": "^8.2.1"
   },
