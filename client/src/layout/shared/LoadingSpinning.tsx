@@ -2,19 +2,19 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
   selectIsLoading,
-  selectIsAuthorizing,
+  selectIsLoadingBusiness,
 } from "../../redux/root/selectors";
 import styled from "styled-components";
 
 export const LoadingSpinning = () => {
   const loading = useSelector(selectIsLoading);
-  const authorizing = useSelector(selectIsAuthorizing);
+  const loadingBusiness = useSelector(selectIsLoadingBusiness);
 
   return (
     <Wrapper show={loading}>
       <div className="container">
         spinnig here
-        <h5 className="text">{authorizing && "Authorizing"}</h5>
+        <h5 className="text">{loadingBusiness && "Loading Business"}</h5>
       </div>
     </Wrapper>
   );

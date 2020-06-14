@@ -1,48 +1,37 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const categories = [
-  {
-    category_id: 1,
-    category_name: "ropa",
-    products_count: 10,
-    category_description: "this is a category for",
-  },
-  {
-    category_id: 2,
-    category_name: "belleza",
-    products_count: 2,
-    category_description: "this is a category for",
-  },
-  {
-    category_id: 3,
-    category_name: "salud",
-    products_count: 5,
-    category_description: "this is a category for",
-  },
-  {
-    category_id: 4,
-    category_name: "carros",
-    products_count: 3,
-    category_description: "this is a category for",
-  },
-];
-export const CategoryList = () => (
-  <Wrapper>
-    <h1>Categorias de Productos</h1>
-    <div className="grid-items-list">
-      {categories.map((category) => (
-        <section className="grid-item">
-          <div className="card">
-            <h5 className="count">{category.products_count}</h5>
-            <h3>{category.category_name}</h3>
-            <p>{category.category_description}</p>
-          </div>
-        </section>
-      ))}
-    </div>
-  </Wrapper>
-);
+import { selectBusinessCategories } from "../../../redux/business/selectors";
+
+export const CategoryList = () => {
+  const dispatch = useDispatch();
+  const { slug } = useParams();
+
+  const categories = useSelector(selectBusinessCategories);
+
+  return (
+    <Wrapper>
+      <h1>Categorias de Productos</h1>
+      <div className="grid-items-list">
+        {categories &&
+          categories.map((category, i) => (
+            <Link to={`${slug}/${category.product_category_id}/products`}>
+              <section className="grid-item" key={i}>
+                <div className="card">
+                  <h5 className="count">{category.products_count}</h5>
+                  <h3>{category.name}</h3>
+                  <p>{category.description}</p>
+                </div>
+              </section>
+            </Link>
+          ))}
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   min-height: 100%;

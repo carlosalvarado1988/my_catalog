@@ -32,7 +32,6 @@ export const submitLoginActionStart = (
   _payload: any
 ) =>
   produce(state, (draft: MutableStoreState) => {
-    draft.authorizing = true;
     draft.loading = true;
   });
 
@@ -41,7 +40,6 @@ export const submitLoginActionDone = (
   payload: Success<any, any>
 ) =>
   produce(state, (draft: MutableStoreState) => {
-    draft.authorizing = false;
     draft.loading = false;
     draft.loggedIn = true;
   });
@@ -51,7 +49,6 @@ export const submitLoginActionFailed = (
   payload: Failure<any, ErrorEvent>
 ) =>
   produce(state, (draft: MutableStoreState) => {
-    draft.authorizing = false;
     draft.loading = false;
     draft.loggedIn = false;
   });

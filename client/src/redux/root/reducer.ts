@@ -18,28 +18,52 @@ import {
   submitSignOutActionFailed,
 } from "./../auth/reducers";
 
+import { getBusinessAction } from "../business/actions";
+import {
+  getBusinessActionStart,
+  getBusinessActionDone,
+  getBusinessActionFailed,
+} from "../business/reducer";
+
 /**
  * The root store state.
  */
 
 export interface MutableStoreState {
-  authorizing: boolean;
+  loadingBusiness: boolean;
   loading: boolean;
   loggedIn: boolean;
+  business: any;
+  actionTracker: any;
+  error: any;
 }
 
 export type StoreState = DeepReadonly<MutableStoreState>;
 
 const INITIAL_STATE: StoreState = produce(
   {
-    authorizing: false,
+    loadingBusiness: false,
     loading: false,
     loggedIn: false,
+    business: {},
+    actionTracker: {
+      currentSelection: {
+        category: null,
+      },
+    },
+    error: {},
   },
   (draft: MutableStoreState) => draft
 );
 
 export const reducer = reducerWithInitialState(INITIAL_STATE);
+
+/**
+ * Business reducers
+ */
+reducer.case(getBusinessAction.started, getBusinessActionStart);
+reducer.case(getBusinessAction.done, getBusinessActionDone);
+reducer.case(getBusinessAction.failed, getBusinessActionFailed);
 
 /**
  * Login reducers

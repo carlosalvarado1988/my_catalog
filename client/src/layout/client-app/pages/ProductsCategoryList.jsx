@@ -1,42 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 
-const products = [
-  "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
-  "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-  "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-  "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-  "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-  "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
-];
+import { useParams, useHistory } from "react-router-dom";
+import { almohadas } from "../../../redux/tempMockData";
 
-export const ProductsCategoryList = () => (
-  <Wrapper>
-    <header>
-      <h1>Category</h1>
-    </header>
-    <main className="grid-items-list">
-      {products.map((product) => (
-        <div className="grid-item">
-          <div className="card">
-            <img src={product} alt="img-1"></img>
-            <div className="details">
-              <h5>Product Name</h5>
-              <p>
-                This is the description of the product so you can read a little
-                bit about it
-              </p>
-              <div className="bottom">
-                <h5>$13</h5>
-                <div>Merliot, Santa Tecla</div>
+export const ProductsCategoryList = () => {
+  const { slug, categoryid } = useParams();
+  const history = useHistory();
+  console.log("history: ", history);
+  console.log("categoryid: ", categoryid);
+  console.log("slug: ", slug);
+
+  return (
+    <Wrapper>
+      <header onClick={() => history.goBack()}>
+        <h1>Category</h1>
+      </header>
+      <main className="grid-items-list">
+        {almohadas.map((product) => (
+          <div className="grid-item">
+            <div className="card">
+              <img src={product} alt="img-1"></img>
+              <div className="details">
+                <h5>Product Name</h5>
+                <p>
+                  This is the description of the product so you can read a
+                  little bit about it
+                </p>
+                <div className="bottom">
+                  <h5>$13</h5>
+                  <div>Merliot, Santa Tecla</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
-    </main>
-  </Wrapper>
-);
+        ))}
+      </main>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   min-height: 100%;

@@ -7,37 +7,63 @@ import { OrderDetails } from "../client-app/pages/OrderDetails";
 import { DeliveryOrder } from "../client-app/pages/DeliveryOrder";
 import { SignIn } from "../dashboard-app/pages/SignIn";
 import { NotFound } from "./NotFound";
+import { CheckSlug } from "../client-app/HOC/CheckSlug";
 
-export const Routes = () => (
-  <Switch>
-    <Route exact path={`/categories`}>
-      <CategoryList />
-    </Route>
-    <Route exact path={"/product-list"}>
-      <ProductsCategoryList />
-    </Route>
-    <Route exact path={"/order-details"}>
-      <OrderDetails />
-    </Route>
-    <Route exact path={"/delivery-order"}>
-      <DeliveryOrder />
-    </Route>
-    <Route path={`/signin`} exact>
-      <SignIn />
-    </Route>
-    <Route
-      path="/admin"
-      render={({ match: { url } }) => (
-        <>
-          <Route path="*">
-            <Redirect to={`/signin`} />
-          </Route>
-        </>
-      )}
-    />
-    <Route exact path="/404">
-      <NotFound />
-    </Route>
-    <Redirect to="/404" />)
-  </Switch>
-);
+export const Routes = () => {
+  return (
+    <Switch>
+      {/* GENERAL ROUTES */}
+      <Route exact path={`/`}>
+        <Redirect to="/find" />
+      </Route>
+      <Route exact path={`/find`}>
+        <h1>Find a business</h1>
+      </Route>
+      <Route exact path={`/signin`}>
+        <SignIn />
+      </Route>
+      <Route exact path="/404">
+        <NotFound />
+      </Route>
+
+      {/* ADMIN ROUTES */}
+      <Route
+        path="/admin"
+        render={({ match: { url } }) => (
+          <>
+            <Route exact path={`${url}/dashboard`}>
+              <h1>Dashboard</h1>
+            </Route>
+            <Route exact path={`${url}/setup`}>
+              <h1>Setup</h1>
+            </Route>
+          </>
+        )}
+      />
+
+      {/* CLIENT APP ROUTES */}
+      <Route exact path={`/:slug`}>
+        <CheckSlug>
+          <CategoryList />
+        </CheckSlug>
+      </Route>
+      <Route exact path={"/:slug/:categoryid/products"}>
+        <CheckSlug>
+          <ProductsCategoryList />
+        </CheckSlug>
+      </Route>
+      <Route exact path={"/:slug/order"}>
+        <CheckSlug>
+          <OrderDetails />
+        </CheckSlug>
+      </Route>
+      <Route exact path={"/:slug/delivery"}>
+        <CheckSlug>
+          <DeliveryOrder />
+        </CheckSlug>
+      </Route>
+
+      <Redirect to="/404" />
+    </Switch>
+  );
+};
