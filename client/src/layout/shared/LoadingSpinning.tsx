@@ -1,20 +1,18 @@
 import React from "react";
+import { Spin } from "antd";
 import { useSelector } from "react-redux";
-import {
-  selectIsLoading,
-  selectIsLoadingBusiness,
-} from "../../redux/root/selectors";
+import { selectIsLoading } from "../../redux/root/selectors";
 import styled from "styled-components";
 
 export const LoadingSpinning = () => {
   const loading = useSelector(selectIsLoading);
-  const loadingBusiness = useSelector(selectIsLoadingBusiness);
+  // const loadingBusiness = useSelector(selectIsLoadingBusiness);
 
   return (
     <Wrapper show={loading}>
       <div className="container">
-        spinnig here
-        <h5 className="text">{loadingBusiness && "Loading Business"}</h5>
+        <Spin size="large" />
+        {/* <h5 className="text">{loadingBusiness && "Loading Business"}</h5> */}
       </div>
     </Wrapper>
   );

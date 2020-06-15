@@ -1,24 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-
-import { useParams, useHistory } from "react-router-dom";
-import { almohadas } from "../../../redux/tempMockData";
+import { isEmpty } from "lodash";
+import { useProductsCategory } from "../hooks/useProductsCategory";
 
 export const ProductsCategoryList = () => {
-  const { slug, categoryid } = useParams();
-  const history = useHistory();
-  console.log("history: ", history);
-  console.log("categoryid: ", categoryid);
-  console.log("slug: ", slug);
+  const { category } = useProductsCategory();
 
-  return (
-    <Wrapper>
-      <header onClick={() => history.goBack()}>
-        <h1>Category</h1>
+  const loading = isEmpty(category);
+  return loading ? null : (
+    <Wrapper id="products-list">
+      <header>
+        <h1>{category.name}</h1>
       </header>
       <main className="grid-items-list">
-        {almohadas.map((product) => (
-          <div className="grid-item">
+        {category.products.map((product, i) => (
+          <div className="grid-item" key={i}>
             <div className="card">
               <img src={product} alt="img-1"></img>
               <div className="details">
@@ -46,7 +42,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 
   .grid-item {
-    padding-top: 30px;
+    /* padding-top: 30px; */
     border: unset;
     border-radius: unset;
     :hover,

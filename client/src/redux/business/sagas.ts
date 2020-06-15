@@ -8,7 +8,7 @@ function* getBusinessSaga(action: GetBusinessActionType): SagaIterator {
   const { payload } = action;
   try {
     const result = yield call(getBusinessAPI, payload);
-    console.log("result: ??", result);
+    console.log("business Sample: ??", result);
     yield put(
       getBusinessAction.done({
         params: payload,

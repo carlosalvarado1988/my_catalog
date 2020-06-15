@@ -37,7 +37,7 @@ interface ApiResponse {
   meta?: Meta;
 }
 interface ResponsePayload {
-  customer?: Customer;
+  business?: Customer;
   message: string; // A human readable message for errors or successes (informational) to be displayed to the customer.
 }
 
@@ -67,20 +67,52 @@ export type Notifications = {
   textfield: TextFieldNotification;
 };
 
-export type InviteAttempt = {
-  email: string;
-  invitee?: SubmitInvitePayload;
+// DATA MODELS //
+export type Image = {
+  product_image_id: number;
+  url: string;
+};
+export type Product = {
+  product_id: number;
+  product_name: string;
+  slug: string;
+  price: number;
+  stock: number;
+  description: string;
+  product_category_id: number;
+  images: Image[];
+};
+export type Category = {
+  product_category_id: number;
+  name: string;
+  slug: string;
+  description: string;
+  products_count: number;
+  products: Product;
+};
+export type PickupSettings = {};
+export type DeliveryZone = {};
+export type BusinessSettings = {
+  business_setting_id: number;
+  pickup_settings: PickupSettings[];
+  delivery_zones: DeliveryZone[];
+  payment_option: string;
+  logo: string;
+};
+export type BusinessAccount = {
+  business_account_id: number;
+  name: string;
+  slug: string;
+  address: string;
+  additional_reference: string;
+  description: string;
+  date_created: Timestamp;
+  date_modified: Timestamp;
+  categories: Category[];
+  business_settings: BusinessSettings;
 };
 
-export type ActionsStateTrack = {
-  goPurchaseSubscription: boolean;
-  inviteAttempt: InviteAttempt;
-  updatePaymentMethodModal: {
-    show: boolean;
-    bodyContent: PaymentMethodModalTypeEnum;
-  };
-};
-
+// API TYPES //
 /**
  * Business
  */
@@ -218,10 +250,10 @@ interface PaymentMethodsResponse extends ApiResponse {
 export type ResponsePaymentMethods = PaymentMethodsResponse;
 
 /**
- * Customer
+ * Account
  */
 
-export type Customer = {
+export type Account = {
   account_name?: string; // The customer's name
   currency?: CurrenciesEnum; // The currency type for the customer (ie USD)
   email?: string; // The customer's email address
@@ -336,7 +368,6 @@ export type Subscription = {
   trial_end: number; // the day the trial ends (or ended?)
 };
 
-// Get from /user endpoint
 export type Team = {
   name?: string; // The name of the team (not implemented right now)
   usersPagination: Pages; // structure to track cursor pagination on users

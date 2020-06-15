@@ -33,6 +33,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mobile-show-only {
+  display: none;
+}
+.destop-show-only {
+  display: block;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -66,7 +73,7 @@ h5 {
 
 .grid-items-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
   grid-gap: 3rem;
 }
 .grid-item {
@@ -86,6 +93,12 @@ h5 {
 }
 
 @media (max-width: 600px) {
+  .mobile-show-only {
+    display: block;
+  }
+  .destop-show-only {
+    display: none;
+  }
   p {
     font-size: var(--text-size-mobile);
     margin: 3px 0;
@@ -111,7 +124,7 @@ h5 {
     margin: 10px 0;
   }
   .grid-items-list {
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     grid-gap: 0.5rem;
   }
 }

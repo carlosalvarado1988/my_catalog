@@ -1,11 +1,11 @@
 import React from "react";
-import { useLoadBusiness } from "./useLoadBusiness";
+import { useLoadBusiness } from "../hooks/useLoadBusiness";
 
 export const CheckSlug = ({ children }) => {
-  const { found, loadingBusiness, error } = useLoadBusiness();
+  const { businessFound, loadingBusiness, error } = useLoadBusiness();
   if (loadingBusiness) return null;
 
-  if (!loadingBusiness && !found) {
+  if (!loadingBusiness && !businessFound) {
     return (
       <>
         {error && <h5>{error.message}</h5>}

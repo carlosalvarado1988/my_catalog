@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { HeaderContainer } from "./layout/shared/HeaderContainer";
+import { NavBarContainer } from "./layout/shared/NavBarContainer";
 import { PageContainer } from "./layout/shared/PageContainer";
 import { FooterContainer } from "./layout/shared/FooterContainer";
 import { LoadingSpinning } from "./layout/shared/LoadingSpinning";
@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <main>
-        <HeaderContainer />
+        <NavBarContainer />
         <PageContainer />
         <FooterContainer />
         <LoadingSpinning />

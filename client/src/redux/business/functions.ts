@@ -1,7 +1,7 @@
 // import axios, { AxiosError, AxiosResponse } from "axios";
 import { GetBusinessPayload } from "../../common/types/api/types";
 // import { handleAxiosError, extractErrorMessage } from "../../common/api";
-import { business_example } from "../tempMockData";
+import { business_account } from "../tempMockData";
 
 export async function getBusinessAPI(
   payload: GetBusinessPayload
@@ -13,8 +13,8 @@ async function getBusiness({ slug }: GetBusinessPayload): Promise<any> {
   return new Promise((resolve, reject) => {
     if (slug === "baboom-life") {
       setTimeout(() => {
-        resolve(business_example);
-      }, 5000);
+        resolve(business_account);
+      }, 3000);
     } else {
       reject(new Error("Business Not found"));
     }

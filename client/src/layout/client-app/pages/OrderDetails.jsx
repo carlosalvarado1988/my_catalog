@@ -1,4 +1,5 @@
 import React from "react";
+import { map } from "lodash";
 import styled from "styled-components";
 
 const orders = [
@@ -44,8 +45,8 @@ export const OrderDetails = () => (
       <div>Cantidad</div>
       <div>Total</div>
     </section>
-    {orders.map((order) => (
-      <section className="item-row items">
+    {map(orders, (order, i) => (
+      <section className="item-row items" key={i}>
         <div>{order.product_name}</div>
         <div>{order.unit_price}</div>
         <div>{order.qty}</div>

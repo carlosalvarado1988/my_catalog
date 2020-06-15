@@ -20,3 +20,7 @@ export const submitPaymentMethodAction = actionCreator.async<
   ErrorEvent
 >("SUBMIT_ORDER_METHOD");
 export type SubmitOrderActionType = Action<SubmitOrderPayload>;
+
+export const setCurrentCategoryAction = actionCreator<number>(
+  "SET_CURRENT_CATEGORY"
+);

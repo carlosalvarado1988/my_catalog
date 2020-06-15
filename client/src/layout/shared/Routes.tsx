@@ -42,22 +42,22 @@ export const Routes = () => {
       />
 
       {/* CLIENT APP ROUTES */}
-      <Route exact path={`/:slug`}>
+      <Route exact path={`/:businessSlug`}>
         <CheckSlug>
           <CategoryList />
         </CheckSlug>
       </Route>
-      <Route exact path={"/:slug/:categoryid/products"}>
+      <Route exact path={"/:businessSlug/:categorySlug"}>
         <CheckSlug>
           <ProductsCategoryList />
         </CheckSlug>
       </Route>
-      <Route exact path={"/:slug/order"}>
+      {/* <Route exact path={"/:businessSlug/order"}>
         <CheckSlug>
           <OrderDetails />
         </CheckSlug>
-      </Route>
-      <Route exact path={"/:slug/delivery"}>
+      </Route> */}
+      <Route exact path={"/:businessSlug/delivery"}>
         <CheckSlug>
           <DeliveryOrder />
         </CheckSlug>
