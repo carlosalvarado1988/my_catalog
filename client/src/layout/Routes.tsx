@@ -1,14 +1,13 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
-import { FindBusinessAccount } from "../client-app/pages/FindBusinessAccount";
-import { CategoryList } from "../client-app/pages/CategoryList";
-import { ProductsCategoryList } from "../client-app/pages/ProductsCategoryList";
-import { OrderDetails } from "../client-app/pages/OrderDetails";
-import { DeliveryOrder } from "../client-app/pages/DeliveryOrder";
-import { SignIn } from "../dashboard-app/pages/SignIn";
-import { NotFound } from "./NotFound";
-import { CheckSlug } from "../client-app/HOC/CheckSlug";
+import { FindBusinessAccount } from "./client-app/pages/FindBusinessAccount";
+import { CategoryList } from "./client-app/pages/CategoryList";
+import { ProductsCategoryList } from "./client-app/pages/ProductsCategoryList";
+import { DeliveryOrder } from "./client-app/pages/DeliveryOrder";
+import { SignIn } from "./dashboard-app/pages/SignIn";
+import { NotFound } from "./shared/NotFound";
+import { CheckSlug } from "./client-app/HOC/CheckSlug";
 
 export const Routes = () => {
   return (
@@ -50,11 +49,6 @@ export const Routes = () => {
           <ProductsCategoryList />
         </CheckSlug>
       </Route>
-      {/* <Route exact path={"/:businessSlug/order"}>
-        <CheckSlug>
-          <OrderDetails />
-        </CheckSlug>
-      </Route> */}
       <Route exact path={"/:businessSlug/delivery"}>
         <CheckSlug>
           <DeliveryOrder />

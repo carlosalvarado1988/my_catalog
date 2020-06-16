@@ -17,7 +17,7 @@ const Wrapper = styled.footer`
   z-index: 10;
   width: 100%;
   height: var(--bar-height-web);
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-1);
   color: lightcyan;
   border-top: 1px solid lightcoral;
   box-sizing: border-box;
@@ -36,7 +36,7 @@ const Wrapper = styled.footer`
       width: 90px;
       height: 40px;
       padding: 5px;
-      border: 5px solid var(--bg-color);
+      border: 5px solid var(--bg-color-1);
       cursor: pointer;
 
       :hover,

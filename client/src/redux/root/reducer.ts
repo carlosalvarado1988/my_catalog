@@ -25,6 +25,9 @@ import {
   getBusinessActionFailed,
 } from "../business/reducers";
 
+import { toogleShowShoopingChartAction } from "../shopping-chart/actions";
+import { toogleShowShoopingChartActionReducer } from "../shopping-chart/reducers";
+
 import {
   setNotificationAction,
   clearNotificationAction,
@@ -40,11 +43,11 @@ import { ActionStageEnum } from "../../common/types/api/enums.d";
 /**
  * The root store state.
  */
-
 export interface MutableStoreState {
   loadingBusiness: boolean;
   loading: boolean;
   loggedIn: boolean;
+  showShoopingChart: boolean;
   notification: Notification;
   business: Business;
   actionTracker: any;
@@ -58,6 +61,7 @@ const INITIAL_STATE: StoreState = produce(
     loadingBusiness: false,
     loading: false,
     loggedIn: false,
+    showShoopingChart: false,
     notification: {
       show: false,
       stage: ActionStageEnum.STARTED,
@@ -81,6 +85,14 @@ export const reducer = reducerWithInitialState(INITIAL_STATE);
  */
 reducer.case(setNotificationAction, setNotificationActionReducer);
 reducer.case(clearNotificationAction, clearNotificationActionReducer);
+
+/**
+ * Shooping-chart reducers
+ */
+reducer.case(
+  toogleShowShoopingChartAction,
+  toogleShowShoopingChartActionReducer
+);
 
 /**
  * Business reducers

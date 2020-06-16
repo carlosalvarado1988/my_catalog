@@ -9,6 +9,6 @@ export const CheckSlug = ({ children }) => {
   if (!loadingBusiness && !businessFound) {
     return <FindBusinessAccount />;
   }
-
+  // check redux for shoppingCart open, so return null
   return children;
 };

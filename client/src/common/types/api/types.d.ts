@@ -8,7 +8,7 @@ import {
   PaymentMethodModalTypeEnum,
   PagesCollectionEnum,
   ActionStageEnum,
-} from "./enums";
+} from "./enums.d";
 
 /**
  * General

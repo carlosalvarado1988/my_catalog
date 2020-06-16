@@ -154,6 +154,40 @@ export const business_account = {
   business_settings: business_settings,
 };
 
+export const orderMocked = [
+  {
+    item_id: 1,
+    product_name: "refrigerador frio-seco multifuncion doble",
+    unit_price: 10,
+    qty: 3,
+  },
+  { item_id: 2, product_name: "product name2", unit_price: 4, qty: 3 },
+  // { item_id: 3, product_name: "product name3", unit_price: 5, qty: 3 },
+  // {
+  //   item_id: 1,
+  //   product_name: "refrigerador frio-seco multifuncion doble",
+  //   unit_price: 10,
+  //   qty: 3,
+  // },
+  // {
+  //   item_id: 1,
+  //   product_name: "refrigerador frio-seco multifuncion doble",
+  //   unit_price: 10,
+  //   qty: 3,
+  // },
+  // {
+  //   item_id: 1,
+  //   product_name: "refrigerador frio-seco multifuncion doble",
+  //   unit_price: 10,
+  //   qty: 3,
+  // },
+  // {
+  //   item_id: 1,
+  //   product_name: "refrigerador frio-seco multifuncion doble",
+  //   unit_price: 10,
+  //   qty: 3,
+  // },
+];
 // const aceites = [
 //   "https://cdn-3.expansion.mx/dims4/default/0961ae8/2147483647/strip/true/crop/1244x660+0+0/resize/800x424!/quality/90/?url=https%3A%2F%2Fcherry-brightspot.s3.amazonaws.com%2Fda%2Fe1%2F204261f7479581c4e8d6c9eedd7e%2Fwhdqw.JPG",
 //   "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSwOoYzAuhLlbL1CRpbwlmP4ytpDNocF-Ky54OTeUHoiHCSQ8QY&usqp=CAU",
@@ -163,10 +197,10 @@ export const business_account = {
 //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTPElIh4TGFjsT8T62EAplYhjpRCot3ERushIOoQZZ2Z2lx3Fi&s",
 // ];
 
-export const almohadas = [
-  "https://www.adetexfoamgroup.com/galeria/productos/almohadas-viscoel%C3%A1sticas_1_1.jpg",
-  "https://i.pinimg.com/236x/4a/6f/6c/4a6f6c817a8501de100046aa73519a49.jpg",
-  "https://i.pinimg.com/236x/52/93/dd/5293ddc97c1f5fc628c091d54072a31f.jpg",
-  "https://www.orliman.com/wp-content/uploads/OSL3100.jpg",
-  "https://cdn.manomano.com/almohada-de-viscoelastica-universal-medidas-almohadas-talla-unica-P-8310440-15371926_1.jpg",
-];
+// export const almohadas = [
+//   "https://www.adetexfoamgroup.com/galeria/productos/almohadas-viscoel%C3%A1sticas_1_1.jpg",
+//   "https://i.pinimg.com/236x/4a/6f/6c/4a6f6c817a8501de100046aa73519a49.jpg",
+//   "https://i.pinimg.com/236x/52/93/dd/5293ddc97c1f5fc628c091d54072a31f.jpg",
+//   "https://www.orliman.com/wp-content/uploads/OSL3100.jpg",
+//   "https://cdn.manomano.com/almohada-de-viscoelastica-universal-medidas-almohadas-talla-unica-P-8310440-15371926_1.jpg",
+// ];
