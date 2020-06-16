@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
+import { FindBusinessAccount } from "../client-app/pages/FindBusinessAccount";
 import { CategoryList } from "../client-app/pages/CategoryList";
 import { ProductsCategoryList } from "../client-app/pages/ProductsCategoryList";
 import { OrderDetails } from "../client-app/pages/OrderDetails";
@@ -14,10 +15,7 @@ export const Routes = () => {
     <Switch>
       {/* GENERAL ROUTES */}
       <Route exact path={`/`}>
-        <Redirect to="/find" />
-      </Route>
-      <Route exact path={`/find`}>
-        <h1>Find a business</h1>
+        <FindBusinessAccount />
       </Route>
       <Route exact path={`/signin`}>
         <SignIn />

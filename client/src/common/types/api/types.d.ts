@@ -7,6 +7,7 @@ import {
   ModalNotificationEnum,
   PaymentMethodModalTypeEnum,
   PagesCollectionEnum,
+  ActionStageEnum,
 } from "./enums";
 
 /**
@@ -41,30 +42,12 @@ interface ResponsePayload {
   message: string; // A human readable message for errors or successes (informational) to be displayed to the customer.
 }
 
-export type SnackNotification = {
+export type Notification = {
   show: boolean;
   closeUntilResponse?: boolean;
-  success: boolean;
+  stage: ActionStageEnum;
   message: string;
-};
-
-export type ModalNotification = {
-  show: boolean;
-  type: ModalNotificationEnum;
-  closeUntilResponse?: boolean;
-  message?: string;
-  persist?: boolean;
-};
-
-export type TextFieldNotification = {
-  show: boolean;
-  message: string;
-};
-
-export type Notifications = {
-  snackbar: SnackNotification;
-  modal: ModalNotification;
-  textfield: TextFieldNotification;
+  description?: string;
 };
 
 // DATA MODELS //
@@ -99,7 +82,7 @@ export type BusinessSettings = {
   payment_option: string;
   logo: string;
 };
-export type BusinessAccount = {
+export type Business = {
   business_account_id: number;
   name: string;
   slug: string;

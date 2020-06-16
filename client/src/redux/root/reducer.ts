@@ -23,7 +23,19 @@ import {
   getBusinessActionStart,
   getBusinessActionDone,
   getBusinessActionFailed,
-} from "../business/reducer";
+} from "../business/reducers";
+
+import {
+  setNotificationAction,
+  clearNotificationAction,
+} from "../notification/actions";
+import {
+  setNotificationActionReducer,
+  clearNotificationActionReducer,
+} from "../notification/reducers";
+
+import { Business, Notification } from "../../common/types/api/types";
+import { ActionStageEnum } from "../../common/types/api/enums.d";
 
 /**
  * The root store state.
@@ -33,7 +45,8 @@ export interface MutableStoreState {
   loadingBusiness: boolean;
   loading: boolean;
   loggedIn: boolean;
-  business: any;
+  notification: Notification;
+  business: Business;
   actionTracker: any;
   error: any;
 }
@@ -45,13 +58,18 @@ const INITIAL_STATE: StoreState = produce(
     loadingBusiness: false,
     loading: false,
     loggedIn: false,
+    notification: {
+      show: false,
+      stage: ActionStageEnum.STARTED,
+      message: "",
+      description: "",
+    },
     business: {},
     actionTracker: {
       currentSelection: {
         category: null,
       },
     },
-    error: {},
   },
   (draft: MutableStoreState) => draft
 );
@@ -59,11 +77,21 @@ const INITIAL_STATE: StoreState = produce(
 export const reducer = reducerWithInitialState(INITIAL_STATE);
 
 /**
+ * Notification reducers
+ */
+reducer.case(setNotificationAction, setNotificationActionReducer);
+reducer.case(clearNotificationAction, clearNotificationActionReducer);
+
+/**
  * Business reducers
  */
 reducer.case(getBusinessAction.started, getBusinessActionStart);
 reducer.case(getBusinessAction.done, getBusinessActionDone);
 reducer.case(getBusinessAction.failed, getBusinessActionFailed);
+
+/**
+ * ADMIN DASHBOARD ACTIONS AND REDUCER
+ */
 
 /**
  * Login reducers

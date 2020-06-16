@@ -6,10 +6,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 export const ClientNavBar = () => {
   const paramsInClientNav = useParams();
-  console.log("paramsInClientNav: ", paramsInClientNav);
   const history = useHistory();
-
-  console.log("history: ", history);
 
   return (
     <Wrapper>

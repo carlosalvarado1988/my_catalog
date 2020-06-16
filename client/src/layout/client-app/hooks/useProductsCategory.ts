@@ -8,16 +8,15 @@ import { Category } from "../../../common/types/api/types";
 
 export const useProductsCategory = () => {
   const { categorySlug } = useParams();
-  const businessCategories: Category[] = useSelector(selectBusinessCategories);
+  const businessCategories = useSelector(selectBusinessCategories);
   const [category, setCategory] = useState<Category | null>(null);
 
   useEffect(() => {
-    setCategory(
-      filter(
-        businessCategories,
-        (cat: Category) => cat.slug === categorySlug
-      )[0]
+    const categoryArray = filter(
+      businessCategories,
+      (cat: Category) => cat.slug === categorySlug
     );
+    setCategory(categoryArray[0] as Category);
   }, [businessCategories, categorySlug]);
 
   return { category };
