@@ -28,7 +28,7 @@ export const DeliveryOrder = () => (
         <h4>Fecha de entrega:</h4>
         <div>
           <label htmlFor="date">Dia:</label>
-          <input id="date" type="date" format="DD/MM/YYYY" required></input>
+          <input id="date" type="date" required></input>
         </div>
         <div>
           <label>De:</label>

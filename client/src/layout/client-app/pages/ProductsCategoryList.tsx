@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import { isEmpty } from "lodash";
+import { isEmpty, get, map } from "lodash";
+import { useHistory } from "react-router-dom";
 import { useProductsCategory } from "../hooks/useProductsCategory";
+import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
+import { Product } from "../../../common/types/api/types";
 
 export const ProductsCategoryList = () => {
   const { category } = useProductsCategory();
+  const { business_slug, category_slug } = useCurrenNavigation();
+  const history = useHistory();
+
+  function handleGoProduct(productId: number) {
+    history.push(`${business_slug}/${category_slug}/${productId}`);
+  }
+
+  const CategoryName = useMemo(() => get(category, "name", ""), [category]);
 
   const loading = isEmpty(category);
   return loading ? null : (
     <Wrapper id="products-list">
       <header>
-        <h1>{category.name}</h1>
+        <h1>{CategoryName}</h1>
       </header>
       <main className="grid-items-list">
-        {category.products.map((product, i) => (
-          <div className="grid-item" key={i}>
+        {map(category?.products, (product: Product, i: number) => (
+          <div
+            className="grid-item"
+            key={i}
+            onClick={() => handleGoProduct(product.product_id)}
+          >
             <div className="card">
-              <img src={product} alt="img-1"></img>
+              <img src={product.images[0].url} alt="img-1"></img>
               <div className="details">
                 <h5>Product Name</h5>
                 <p>

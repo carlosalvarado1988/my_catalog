@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import { selectShowShoopingChart } from "../../redux/shopping-chart/selectors";
+import { selectShowShoppingCart } from "../../redux/shopping-cart/selectors";
 import { Routes } from "../Routes";
 
-export const PageContainer = () => {
-  const showShoopingChart = useSelector(selectShowShoopingChart);
+export const PageContainer = React.memo(function Component() {
+  const showShoppingCart = useSelector(selectShowShoppingCart);
   return (
-    <Wrapper hide={showShoopingChart}>
+    <Wrapper hide={showShoppingCart}>
       <Routes />
     </Wrapper>
   );
-};
+});
 
 interface Prop {
   hide: boolean;

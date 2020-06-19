@@ -6,7 +6,7 @@ import { NavBarContainer } from "./layout/shared/NavBarContainer";
 import { PageContainer } from "./layout/shared/PageContainer";
 import { FooterContainer } from "./layout/shared/FooterContainer";
 import { LoadingSpinning } from "./layout/shared/LoadingSpinning";
-import { ShoopingChartDetails } from "./layout/shared/ShoopingChartDetails";
+import { ShoopingCartDetails } from "./layout/shared/ShoopingCartDetails";
 
 import "./config/axios.config";
 
@@ -16,7 +16,7 @@ function App() {
     <BrowserRouter>
       <main>
         <NavBarContainer />
-        <ShoopingChartDetails />
+        <ShoopingCartDetails />
         <PageContainer />
         <FooterContainer />
         <LoadingSpinning />

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectIsLoading } from "../../redux/root/selectors";
 import styled from "styled-components";
 
-export const LoadingSpinning = () => {
+export const LoadingSpinning = React.memo(function Component() {
   const loading = useSelector(selectIsLoading);
   // const loadingBusiness = useSelector(selectIsLoadingBusiness);
 
@@ -16,7 +16,7 @@ export const LoadingSpinning = () => {
       </div>
     </Wrapper>
   );
-};
+});
 
 interface StyledProps {
   show: boolean;

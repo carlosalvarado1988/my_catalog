@@ -15,8 +15,83 @@ import {
  */
 
 // types might change
-type Timestamp = number; // A unix timestamp
+type Timestamp = string; // format "2020-06-08 20:02:32"
 type Currency = number;
+
+// DATABASE DATA MODELS
+export type Image = {
+  product_image_id: number;
+  url: string;
+  product_id: number;
+};
+export type Product = {
+  product_id: number;
+  product_name: string;
+  slug: string;
+  price: number;
+  stock: number;
+  description: string;
+  product_category_id: number;
+  images: Image[];
+};
+export type Category = {
+  product_category_id: number;
+  name: string;
+  slug: string;
+  description: string;
+  products_count: number;
+  products: Product[];
+};
+
+export type PickupDayAvailability = {
+  [day: string]: {
+    from: string;
+    to: string;
+  };
+};
+export type PickupDetails = {
+  pickup_id: number;
+  address: string;
+  additional_reference?: string;
+  pickup_availability: PickupDayAvailability;
+};
+export type PickupSettings = {
+  [place: string]: PickupDetails;
+};
+
+export type DeliveryZone = {};
+export type BusinessSettings = {
+  business_setting_id: number;
+  pickup_settings: PickupSettings;
+  delivery_zones: DeliveryZone[];
+  payment_option: string;
+  logo: string;
+};
+export type Business = {
+  business_account_id: number;
+  name: string;
+  slug: string;
+  address: string;
+  additional_reference: string;
+  description: string;
+  date_created: Timestamp;
+  date_modified: Timestamp | null;
+  categories?: Category[];
+  business_settings?: BusinessSettings;
+};
+export type OrderItem = {
+  product_id: number;
+  product_name: string;
+  unit_price: number;
+  qty: number;
+};
+export type ShoppingCart = {
+  business_id?: number;
+  amount: number;
+  items?: OrderItem[];
+};
+
+// UI DATA MODELS
 export type Token = { jwt: string; expires: Timestamp };
 type Pagination = {
   pages?: number; // Total number of pages available
@@ -49,53 +124,8 @@ export type Notification = {
   message: string;
   description?: string;
 };
-
-// DATA MODELS //
-export type Image = {
-  product_image_id: number;
-  url: string;
-};
-export type Product = {
-  product_id: number;
-  product_name: string;
-  slug: string;
-  price: number;
-  stock: number;
-  description: string;
-  product_category_id: number;
-  images: Image[];
-};
-export type Category = {
-  product_category_id: number;
-  name: string;
-  slug: string;
-  description: string;
-  products_count: number;
-  products: Product;
-};
-export type PickupSettings = {};
-export type DeliveryZone = {};
-export type BusinessSettings = {
-  business_setting_id: number;
-  pickup_settings: PickupSettings[];
-  delivery_zones: DeliveryZone[];
-  payment_option: string;
-  logo: string;
-};
-export type Business = {
-  business_account_id: number;
-  name: string;
-  slug: string;
-  address: string;
-  additional_reference: string;
-  description: string;
-  date_created: Timestamp;
-  date_modified: Timestamp;
-  categories: Category[];
-  business_settings: BusinessSettings;
-};
-
-// API TYPES //
+s;
+// API PAYLOADS //
 /**
  * Business
  */
@@ -333,30 +363,6 @@ export type SetNewIndexPagePayload = {
   new_preloaded_index_page: number;
 };
 
-export type Subscription = {
-  id: string; // The unique identifier for this subscription
-  billing_cycle_anchor: string; // ???
-  plan: PlanPriceEnum; // The type of plan
-  unit_price: Currency; // The price per license
-  start_date: Timestamp; // The start date of the subscriptions as a unix timestamp
-  ended_at: Timestamp | null; // The expired date of the subscriptions as a unix timestamp | null if still active
-  current_period_start: Timestamp; // The start date of the current subscription period as a unix timestamp
-  current_period_end: Timestamp; // The end date of the current subscription period as a unix timestamp
-  licenses: number; // Total number of licenses
-  monthly_price: Currency; // Total cost of subscription
-  status: PlanStatusEnum; // The status of the susbription
-  team?: Team; // The subscription's team
-  trial_period_days: number; // The number of days
-  trial_start: number; // The date the trial started
-  trial_end: number; // the day the trial ends (or ended?)
-};
-
-export type Team = {
-  name?: string; // The name of the team (not implemented right now)
-  usersPagination: Pages; // structure to track cursor pagination on users
-  inviteesPagination: Pages; // structure to track cursor pagination on invitees
-};
-
 export type Pages = {
   current_page_index: number;
   total: number;
@@ -370,18 +376,6 @@ export type Page = {
   returned: number;
   users: User[];
   dirty: boolean;
-};
-
-export type User = {
-  user_id: number; // Rubica identifier
-  email: string; // The user's email address
-  invite_status?: UserInviteStatusEnum; // The user's status on the team (if undefined call is "Active")
-  role: UserRoleEnum; // The user's role on the team
-  primary_contact?: boolean; // true if the user is primary, false if not (not implemented right now)
-};
-
-export type Address = {
-  postal_code: string; // A postal code (zipcode)
 };
 
 export type CreditCardInfo = {

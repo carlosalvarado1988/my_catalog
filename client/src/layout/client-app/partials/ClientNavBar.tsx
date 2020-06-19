@@ -7,18 +7,18 @@ import {
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { toogleShowShoopingChartAction } from "../../../redux/shopping-chart/actions";
-import { selectShowShoopingChart } from "../../../redux/shopping-chart/selectors";
+import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
+import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
 
 import styled, { css } from "styled-components";
 
 export const ClientNavBar = () => {
   const dispatch = useDispatch();
-  const showShoopingChart = useSelector(selectShowShoopingChart);
+  const showShoppingCart = useSelector(selectShowShoppingCart);
   const history = useHistory();
 
   return (
-    <Wrapper showingChart={showShoopingChart}>
+    <Wrapper showingCart={showShoppingCart}>
       <div className="left">
         <StyledLeftOutlined
           className="mobile-show-only"
@@ -32,10 +32,10 @@ export const ClientNavBar = () => {
 
       <div
         className="order"
-        onClick={() => dispatch(toogleShowShoopingChartAction())}
+        onClick={() => dispatch(toogleShowShoopingCartAction())}
       >
-        <StyledBadge count={showShoopingChart ? null : 3}>
-          {showShoopingChart ? (
+        <StyledBadge count={showShoppingCart ? null : 3}>
+          {showShoppingCart ? (
             <StyledRollbackOutlined />
           ) : (
             <StyledShoppingCart />
@@ -73,7 +73,7 @@ const StyledBadge = styled(Badge)`
 `;
 
 interface Props {
-  showingChart: boolean;
+  showingCart: boolean;
 }
 const Wrapper = styled.div<Props>`
   display: flex;
@@ -102,7 +102,7 @@ const Wrapper = styled.div<Props>`
     align-items: center;
     margin-right: 10px;
     font-size: 32px;
-    color: ${({ showingChart }) => (showingChart ? `inherit` : "blue")};
+    color: ${({ showingCart }) => (showingCart ? `inherit` : "blue")};
     .shopping-cart {
       text-decoration: underline;
       color: inherit;

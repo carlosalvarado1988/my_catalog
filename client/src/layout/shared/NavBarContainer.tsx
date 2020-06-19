@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { selectShowShoopingChart } from "../../redux/shopping-chart/selectors";
+import { selectShowShoppingCart } from "../../redux/shopping-cart/selectors";
 import { ClientNavBar } from "../client-app/partials/ClientNavBar";
 
-export const NavBarContainer = () => {
-  const showShoopingChart = useSelector(selectShowShoopingChart);
+export const NavBarContainer = React.memo(function Component() {
+  const showShoppingCart = useSelector(selectShowShoppingCart);
   return (
-    <Wrapper showingChart={showShoopingChart}>
+    <Wrapper showingCart={showShoppingCart}>
       <ClientNavBar />
     </Wrapper>
   );
-};
+});
 
 interface Props {
-  showingChart: boolean;
+  showingCart: boolean;
 }
 
 const Wrapper = styled.header<Props>`
@@ -23,8 +23,8 @@ const Wrapper = styled.header<Props>`
   left: 0;
   width: 100%;
   height: var(--bar-height-web);
-  background-color: ${({ showingChart }) =>
-    showingChart ? `var(--bg-color-2)` : "var(--bg-color-1)"};
+  background-color: ${({ showingCart }) =>
+    showingCart ? `var(--bg-color-2)` : "var(--bg-color-1)"};
   z-index: 10;
   box-shadow: 0 8px 6px -7px lightcoral;
   box-sizing: border-box;

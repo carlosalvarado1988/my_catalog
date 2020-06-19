@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,21 +11,20 @@ export const useLoadBusiness = () => {
   const { businessSlug } = useParams();
   const loadingBusiness = useSelector(selectIsLoadingBusiness);
   const businessSlugRedux = useSelector(selectBusinessSlugRedux);
-  const [businessFound, setBusinessFound] = useState(false);
 
+  const loading_business = useMemo(() => loadingBusiness, [loadingBusiness]);
+  const business_found = useMemo(() => businessSlug === businessSlugRedux, [
+    businessSlug,
+    businessSlugRedux,
+  ]);
   useEffect(() => {
-    setBusinessFound(businessSlug === businessSlugRedux);
-  }, [businessSlug, businessSlugRedux]);
-
-  useEffect(() => {
-    if (!businessFound) {
+    if (!business_found) {
       dispatch(
         getBusinessAction.started({
           slug: businessSlug.toLowerCase(),
         })
       );
     }
-  }, [dispatch, businessFound, businessSlug]);
-
-  return { businessFound, loadingBusiness };
+  }, [dispatch, business_found, businessSlug]);
+  return { business_found, loading_business };
 };

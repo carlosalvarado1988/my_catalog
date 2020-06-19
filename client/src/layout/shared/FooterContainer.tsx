@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-export const FooterContainer = () => (
-  <Wrapper>
-    <div className="footer-content">
-      <button>Comprar</button>
-    </div>
-  </Wrapper>
-);
+export const FooterContainer = React.memo(function Component() {
+  return (
+    <Wrapper>
+      <div className="footer-content">
+        <button>Comprar</button>
+      </div>
+    </Wrapper>
+  );
+});
 
 const Wrapper = styled.footer`
   position: fixed;

@@ -25,8 +25,8 @@ import {
   getBusinessActionFailed,
 } from "../business/reducers";
 
-import { toogleShowShoopingChartAction } from "../shopping-chart/actions";
-import { toogleShowShoopingChartActionReducer } from "../shopping-chart/reducers";
+import { toogleShowShoopingCartAction } from "../shopping-cart/actions";
+import { toogleShowShoopingCartActionReducer } from "../shopping-cart/reducers";
 
 import {
   setNotificationAction,
@@ -37,7 +37,11 @@ import {
   clearNotificationActionReducer,
 } from "../notification/reducers";
 
-import { Business, Notification } from "../../common/types/api/types";
+import {
+  Business,
+  Notification,
+  ShoppingCart,
+} from "../../common/types/api/types";
 import { ActionStageEnum } from "../../common/types/api/enums.d";
 
 /**
@@ -47,7 +51,8 @@ export interface MutableStoreState {
   loadingBusiness: boolean;
   loading: boolean;
   loggedIn: boolean;
-  showShoopingChart: boolean;
+  showShoppingCart: boolean;
+  shoppingCart: ShoppingCart;
   notification: Notification;
   business: Business;
   actionTracker: any;
@@ -61,7 +66,12 @@ const INITIAL_STATE: StoreState = produce(
     loadingBusiness: false,
     loading: false,
     loggedIn: false,
-    showShoopingChart: false,
+    showShoppingCart: false,
+    shoppingCart: {
+      business_id: null,
+      amount: 0,
+      items: [],
+    },
     notification: {
       show: false,
       stage: ActionStageEnum.STARTED,
@@ -87,12 +97,9 @@ reducer.case(setNotificationAction, setNotificationActionReducer);
 reducer.case(clearNotificationAction, clearNotificationActionReducer);
 
 /**
- * Shooping-chart reducers
+ * Shooping-cart reducers
  */
-reducer.case(
-  toogleShowShoopingChartAction,
-  toogleShowShoopingChartActionReducer
-);
+reducer.case(toogleShowShoopingCartAction, toogleShowShoopingCartActionReducer);
 
 /**
  * Business reducers
