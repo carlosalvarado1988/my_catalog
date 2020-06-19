@@ -5,8 +5,3 @@ export const selectBusinessSlugRedux = (state: StoreState) =>
 export const selectBusiness = (state: StoreState) => state.business;
 export const selectBusinessCategories = (state: StoreState) =>
   state.business.categories;
-// export const selectBusinessProducts = (state: StoreState) =>
-//   state.business.products;
-
-export const selectBusinessCategorySelected = (state: StoreState) =>
-  state.actionTracker.currentSelection.category;

@@ -1,5 +1,5 @@
 import React from "react";
-import { FindBusinessAccount } from "../pages/FindBusinessAccount";
+import { InvalidLink } from "../partials/InvalidLink";
 import { useLoadBusiness } from "../hooks/useLoadBusiness";
 
 export const CheckSlug = React.memo(function Component({ children }) {
@@ -8,7 +8,7 @@ export const CheckSlug = React.memo(function Component({ children }) {
   if (loading_business) return null;
 
   if (!loading_business && !business_found) {
-    return <FindBusinessAccount />;
+    return <InvalidLink linkType={`Negocio`} />;
   }
 
   return children;

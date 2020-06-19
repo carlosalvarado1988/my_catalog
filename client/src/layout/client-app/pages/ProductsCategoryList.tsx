@@ -2,12 +2,14 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import { isEmpty, get, map } from "lodash";
 import { useHistory } from "react-router-dom";
-import { useProductsCategory } from "../hooks/useProductsCategory";
+
+import { InvalidLink } from "../partials/InvalidLink";
+import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
 import { Product } from "../../../common/types/api/types";
 
 export const ProductsCategoryList = () => {
-  const { category } = useProductsCategory();
+  const { category } = useBusinessInventory();
   const { business_slug, category_slug } = useCurrenNavigation();
   const history = useHistory();
 
@@ -17,8 +19,9 @@ export const ProductsCategoryList = () => {
 
   const CategoryName = useMemo(() => get(category, "name", ""), [category]);
 
-  const loading = isEmpty(category);
-  return loading ? null : (
+  return isEmpty(category) ? (
+    <InvalidLink linkType={`Categorias`} />
+  ) : (
     <Wrapper id="products-list">
       <header>
         <h1>{CategoryName}</h1>

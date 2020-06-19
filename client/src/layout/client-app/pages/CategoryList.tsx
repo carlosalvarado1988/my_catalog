@@ -1,29 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { startCase } from "lodash";
+import { startCase, map } from "lodash";
 
+import { InvalidLink } from "../partials/InvalidLink";
 import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
-import { Category } from "../../../common/types/api/types";
-import { selectBusinessCategories } from "../../../redux/business/selectors";
+import { useBusinessInventory } from "../hooks/useBusinessInventory";
+import { Category } from "../../../common/types/api/types.d";
 
 export const CategoryList = React.memo(function Component() {
-  const { business_slug } = useCurrenNavigation();
   const history = useHistory();
-  const categories: Category[] = useSelector(
-    selectBusinessCategories
-  ) as Category[];
+  const { business_slug } = useCurrenNavigation();
+  const { valid_business, categories } = useBusinessInventory();
 
   const goCategory = (newCategorySlug: string) => {
     history.push(`${business_slug}/${newCategorySlug}`);
   };
 
-  return (
+  return !valid_business ? (
+    <InvalidLink linkType={`Negocio`} />
+  ) : (
     <Wrapper>
       <h1>Categorias</h1>
       <div className="grid-items-list">
-        {categories.map((category: Category, i: number) => (
+        {map(categories, (category: Category, i: number) => (
           <section
             className="grid-item"
             key={i}

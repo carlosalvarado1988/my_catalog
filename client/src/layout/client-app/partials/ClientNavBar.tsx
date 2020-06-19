@@ -34,7 +34,7 @@ export const ClientNavBar = () => {
         className="order"
         onClick={() => dispatch(toogleShowShoopingCartAction())}
       >
-        <StyledBadge count={showShoppingCart ? null : 3}>
+        <StyledBadge count={showShoppingCart ? 0 : 3}>
           {showShoppingCart ? (
             <StyledRollbackOutlined />
           ) : (
