@@ -12,7 +12,7 @@ export const ProductsCategoryList = () => {
   const history = useHistory();
 
   function handleGoProduct(productId: number) {
-    history.push(`${business_slug}/${category_slug}/${productId}`);
+    history.push(`/${business_slug}/${category_slug}/${productId}`);
   }
 
   const CategoryName = useMemo(() => get(category, "name", ""), [category]);
@@ -28,7 +28,10 @@ export const ProductsCategoryList = () => {
           <div
             className="grid-item"
             key={i}
-            onClick={() => handleGoProduct(product.product_id)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleGoProduct(product.product_id);
+            }}
           >
             <div className="card">
               <img src={product.images[0].url} alt="img-1"></img>

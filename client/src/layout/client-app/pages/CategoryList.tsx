@@ -8,7 +8,7 @@ import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
 import { Category } from "../../../common/types/api/types";
 import { selectBusinessCategories } from "../../../redux/business/selectors";
 
-export const CategoryList = () => {
+export const CategoryList = React.memo(function Component() {
   const { business_slug } = useCurrenNavigation();
   const history = useHistory();
   const categories: Category[] = useSelector(
@@ -27,7 +27,10 @@ export const CategoryList = () => {
           <section
             className="grid-item"
             key={i}
-            onClick={() => goCategory(category.slug)}
+            onClick={(e) => {
+              e.preventDefault();
+              goCategory(category.slug);
+            }}
           >
             <div className="card">
               <h5 className="count">{category.products_count}</h5>
@@ -39,7 +42,7 @@ export const CategoryList = () => {
       </div>
     </Wrapper>
   );
-};
+});
 
 const Wrapper = styled.div`
   min-height: 100%;

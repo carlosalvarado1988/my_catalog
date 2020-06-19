@@ -4,11 +4,12 @@ import { useLoadBusiness } from "../hooks/useLoadBusiness";
 
 export const CheckSlug = React.memo(function Component({ children }) {
   const { loading_business, business_found } = useLoadBusiness();
+
   if (loading_business) return null;
 
   if (!loading_business && !business_found) {
     return <FindBusinessAccount />;
   }
-  console.log("CheckSlug: ", children);
+
   return children;
 });

@@ -4,6 +4,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { FindBusinessAccount } from "./client-app/pages/FindBusinessAccount";
 import { CategoryList } from "./client-app/pages/CategoryList";
 import { ProductsCategoryList } from "./client-app/pages/ProductsCategoryList";
+import { ProductDescription } from "./client-app/pages/ProductDescription";
 import { DeliveryOrder } from "./client-app/pages/DeliveryOrder";
 import { SignIn } from "./dashboard-app/pages/SignIn";
 import { NotFound } from "./shared/NotFound";
@@ -22,7 +23,6 @@ export const Routes = () => {
       <Route exact path="/404">
         <NotFound />
       </Route>
-
       {/* ADMIN ROUTES */}
       <Route
         path="/admin"
@@ -37,7 +37,6 @@ export const Routes = () => {
           </>
         )}
       />
-
       {/* CLIENT APP ROUTES */}
       <Route exact path={`/:businessSlug`}>
         <CheckSlug>
@@ -49,12 +48,17 @@ export const Routes = () => {
           <ProductsCategoryList />
         </CheckSlug>
       </Route>
+      <Route exact path={"/:businessSlug/:categorySlug/:productId"}>
+        <CheckSlug>
+          <ProductDescription />
+        </CheckSlug>
+      </Route>
+
       <Route exact path={"/:businessSlug/delivery"}>
         <CheckSlug>
           <DeliveryOrder />
         </CheckSlug>
       </Route>
-
       <Redirect to="/404" />
     </Switch>
   );

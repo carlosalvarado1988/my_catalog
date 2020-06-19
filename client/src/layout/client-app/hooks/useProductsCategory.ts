@@ -9,15 +9,6 @@ import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
 export const useProductsCategory = () => {
   const { category_slug } = useCurrenNavigation();
   const businessCategories = useSelector(selectBusinessCategories);
-  // const [category, setCategory] = useState<Category | null>(null);
-
-  // useEffect(() => {
-  //   const categoryArray = filter(
-  //     businessCategories,
-  //     (cat: Category) => cat.slug === category_slug
-  //   );
-  //   setCategory(categoryArray[0] as Category);
-  // }, [businessCategories, category_slug]);
   const category: Category = useMemo(() => {
     return isEmpty(category_slug)
       ? ({} as Category)
