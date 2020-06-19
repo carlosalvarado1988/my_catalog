@@ -1,17 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
+import { ShoppingBar } from "../client-app/partials/ShoppingBar";
+
 export const FooterContainer = React.memo(function Component() {
   return (
     <Wrapper>
-      <div className="footer-content">
-        <button>Comprar</button>
+      <div className="mobile-show-only">
+        <ShoppingBar />
       </div>
+      <div className="desktop-show-only"></div>
     </Wrapper>
   );
 });
 
 const Wrapper = styled.footer`
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -20,39 +24,11 @@ const Wrapper = styled.footer`
   width: 100%;
   height: var(--bar-height-web);
   background-color: var(--bg-color-1);
-  color: lightcyan;
-  border-top: 1px solid lightcoral;
+  box-shadow: 0px 5px 10px 2px lightcoral;
   box-sizing: border-box;
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    max-width: var(--max-width-content);
-    padding: 15px 30px;
-    box-sizing: border-box;
-    button {
-      height: 50px;
-      float: right;
-      background: red;
-      /* color: var(--text-color); */
-      width: 90px;
-      height: 40px;
-      padding: 5px;
-      border: 5px solid var(--bg-color-1);
-      cursor: pointer;
-
-      :hover,
-      :focus {
-        outline: 2px solid red;
-        opacity: 0.5;
-      }
-    }
-  }
 
   @media (max-width: 600px) {
+    display: block;
     height: var(--bar-height-web-mobile);
-    .footer-content {
-      padding: 5px 10px;
-    }
   }
 `;

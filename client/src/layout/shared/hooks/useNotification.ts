@@ -13,8 +13,8 @@ export const useNotification = () => {
   );
 
   notification.config({
-    placement: "bottomRight",
-    bottom: 24,
+    placement: "topRight",
+    bottom: 40,
   });
 
   useEffect(() => {

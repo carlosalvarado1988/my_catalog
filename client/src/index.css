@@ -17,6 +17,7 @@
   --card-color: #fff; */
   --bar-height-web: 70px;
   --bar-height-web-mobile: 50px;
+  --search-web-mobile: 40px;
   --text-size-web: 2rem;
   --text-size-mobile: 1rem;
   --max-width-content: 900px;
@@ -37,7 +38,7 @@ body {
 .mobile-show-only {
   display: none;
 }
-.destop-show-only {
+.desktop-show-only {
   display: block;
 }
 
@@ -96,9 +97,11 @@ h5 {
 @media (max-width: 600px) {
   .mobile-show-only {
     display: block;
+    height: 100%;
   }
-  .destop-show-only {
+  .desktop-show-only {
     display: none;
+    height: 100%;
   }
   p {
     font-size: var(--text-size-mobile);

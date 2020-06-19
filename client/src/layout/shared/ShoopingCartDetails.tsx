@@ -127,7 +127,7 @@ export const ShoopingCartDetails = React.memo(function Component() {
 const Wrapper = styled.div`
   margin-top: -35px;
   min-height: 100%;
-  padding: 10px 0;
+  /* padding: 0 0 10px 0; */
   box-sizing: border-box;
 
   .collapse-hidden-container {

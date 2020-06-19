@@ -19,27 +19,6 @@ export const InvalidLink = React.memo(function Component({ linkType }: Prop) {
     category,
   } = useBusinessInventory();
 
-  const goToUrl = () => {
-    if (valid_category) {
-      return `/${business_slug}/${category_slug}`;
-    } else if (valid_business) {
-      return `/${business_slug}`;
-    }
-    return `/`;
-  };
-
-  const buttonText = () => {
-    if (valid_category) {
-      return `Ver Productos en seccion ${category.name} `;
-    } else if (valid_business) {
-      return `Ver catalogo completo de ${business_details.name} `;
-    } else {
-      return `go home`;
-    }
-  };
-
-  const ButtonNav = () => {};
-
   return (
     <Wrapper>
       <h4 className="text">El link de {linkType} no es valido</h4>

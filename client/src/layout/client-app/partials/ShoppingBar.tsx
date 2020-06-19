@@ -1,29 +1,19 @@
 import React from "react";
 import { Badge } from "antd";
-import {
-  LeftOutlined,
-  ShoppingCartOutlined,
-  RollbackOutlined,
-} from "@ant-design/icons";
+import { ShoppingCartOutlined, RollbackOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
 import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
 
 import styled, { css } from "styled-components";
 
-export const ClientNavBar = () => {
+export const ShoppingBar = () => {
   const dispatch = useDispatch();
   const showShoppingCart = useSelector(selectShowShoppingCart);
-  const history = useHistory();
 
   return (
     <Wrapper showingCart={showShoppingCart}>
       <div className="left">
-        <StyledLeftOutlined
-          className="mobile-show-only"
-          onClick={() => history.goBack()}
-        />
         <div className="brand">
           <p className="pre-title">catalog by: </p>
           <h2 className="bizz-title">Baboon life nad beauty</h2>
@@ -53,10 +43,6 @@ const baseIconSizes = css`
   }
 `;
 
-const StyledLeftOutlined = styled(LeftOutlined)`
-  ${baseIconSizes}
-  margin-right: 10px;
-`;
 const StyledRollbackOutlined = styled(RollbackOutlined)`
   ${baseIconSizes}
 `;
