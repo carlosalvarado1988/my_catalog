@@ -1,23 +1,38 @@
 import React from "react";
 import { Badge } from "antd";
+import { useHistory } from "react-router-dom";
 import { ShoppingCartOutlined, RollbackOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
-import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
-
 import styled, { css } from "styled-components";
 
-export const ShoppingBar = () => {
+import { AddProduct } from "../partials/AddProduct";
+import { useBusinessInventory } from "../hooks/useBusinessInventory";
+import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
+import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
+
+export const ShoppingBar = React.memo(function Component() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const showShoppingCart = useSelector(selectShowShoppingCart);
+  const {
+    valid_business,
+    business_slug,
+    business_details,
+    valid_product,
+  } = useBusinessInventory();
+
+  const BusinessName = () => (
+    <div className="brand" onClick={() => history.push(`/${business_slug}`)}>
+      <p className="pre-title">catalog by: </p>
+      <h2 className="bizz-title">{business_details.name}</h2>
+    </div>
+  );
 
   return (
     <Wrapper showingCart={showShoppingCart}>
       <div className="left">
-        <div className="brand">
-          <p className="pre-title">catalog by: </p>
-          <h2 className="bizz-title">Baboon life nad beauty</h2>
-        </div>
+        {valid_business && !valid_product && <BusinessName />}
+        {valid_product && <AddProduct />}
       </div>
 
       <div
@@ -34,7 +49,7 @@ export const ShoppingBar = () => {
       </div>
     </Wrapper>
   );
-};
+});
 
 const baseIconSizes = css`
   font-size: 3.2rem;

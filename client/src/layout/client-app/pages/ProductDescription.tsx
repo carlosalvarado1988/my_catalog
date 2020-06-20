@@ -6,7 +6,6 @@ import { useBusinessInventory } from "../hooks/useBusinessInventory";
 
 export const ProductDescription = React.memo(function Component() {
   const { product } = useBusinessInventory();
-  console.log("product: ", product);
 
   return isEmpty(product) ? (
     <InvalidLink linkType={`Producto`} />

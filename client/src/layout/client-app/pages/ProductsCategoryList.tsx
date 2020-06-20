@@ -5,12 +5,10 @@ import { useHistory } from "react-router-dom";
 
 import { InvalidLink } from "../partials/InvalidLink";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
-import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
 import { Product } from "../../../common/types/api/types";
 
 export const ProductsCategoryList = () => {
-  const { category } = useBusinessInventory();
-  const { business_slug, category_slug } = useCurrenNavigation();
+  const { business_slug, category, category_slug } = useBusinessInventory();
   const history = useHistory();
 
   function handleGoProduct(productId: number) {

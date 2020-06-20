@@ -51,15 +51,10 @@ export const Routes = () => {
       <Route exact path={"/:businessSlug/:categorySlug/:productId"}>
         <CheckSlug>
           <ProductDescription />
-        </CheckSlug>
-      </Route>
-
-      <Route exact path={"/:businessSlug/delivery"}>
-        <CheckSlug>
           <DeliveryOrder />
         </CheckSlug>
       </Route>
-      <Redirect to="/404" />
+      <Redirect to="/" />
     </Switch>
   );
 };

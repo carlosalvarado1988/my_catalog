@@ -2,10 +2,14 @@
 /* @import "~antd/dist/antd.css"; */
 
 @import "~antd/dist/antd.dark.css";
-/* --bg-color-1: #282c34; --card-color: #282c34; */
+/* --bg-color-1: black;
+--bg-color-2: #1f1b24;
+--card-color: #282c34; */
 
 /* @import "~antd/dist/antd.compact.css"; */
-/* --bg-color-1: #eee; --card-color: #fff; */
+/* --bg-color-1: #eee;
+  --bg-color-2: #eeffff;
+  --card-color: #fff; */
 
 :root {
   font-size: 62.5%;
@@ -13,8 +17,6 @@
   --bg-color-1: black;
   --bg-color-2: #1f1b24;
   --card-color: #282c34;
-  /* --bg-color-1: #eee;
-  --card-color: #fff; */
   --bar-height-web: 70px;
   --bar-height-web-mobile: 50px;
   --search-web-mobile: 40px;

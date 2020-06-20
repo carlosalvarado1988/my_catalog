@@ -90,7 +90,10 @@ export type ShoppingCart = {
   amount: number;
   items?: OrderItem[];
 };
-
+export type NavigationTrack = {
+  category_slug: string | null;
+  product_id: string | null;
+};
 // UI DATA MODELS
 export type Token = { jwt: string; expires: Timestamp };
 type Pagination = {

@@ -4,14 +4,12 @@ import { useHistory } from "react-router-dom";
 import { startCase, map } from "lodash";
 
 import { InvalidLink } from "../partials/InvalidLink";
-import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import { Category } from "../../../common/types/api/types.d";
 
 export const CategoryList = React.memo(function Component() {
   const history = useHistory();
-  const { business_slug } = useCurrenNavigation();
-  const { valid_business, categories } = useBusinessInventory();
+  const { valid_business, business_slug, categories } = useBusinessInventory();
 
   const goCategory = (newCategorySlug: string) => {
     history.push(`${business_slug}/${newCategorySlug}`);

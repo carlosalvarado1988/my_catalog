@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "antd";
-import { LeftOutlined, AudioOutlined } from "@ant-design/icons";
+import { LeftOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
 const { Search } = Input;

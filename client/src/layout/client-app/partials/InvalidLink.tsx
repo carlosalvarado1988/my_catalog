@@ -4,18 +4,18 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
-import { useCurrenNavigation } from "../../shared/hooks/useCurrentNavigation";
 interface Prop {
   linkType: string;
 }
 
 export const InvalidLink = React.memo(function Component({ linkType }: Prop) {
   const history = useHistory();
-  const { business_slug, category_slug } = useCurrenNavigation();
   const {
     valid_business,
+    business_slug,
     business_details,
     valid_category,
+    category_slug,
     category,
   } = useBusinessInventory();
 

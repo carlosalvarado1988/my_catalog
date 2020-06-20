@@ -29,6 +29,15 @@ import { toogleShowShoopingCartAction } from "../shopping-cart/actions";
 import { toogleShowShoopingCartActionReducer } from "../shopping-cart/reducers";
 
 import {
+  setNavigationTrackCategorySlugAction,
+  setNavigationTrackProductIdAction,
+} from "../navigation/actions";
+import {
+  setNavigationTrackCategorySlugActionReducer,
+  setNavigationTrackProductIdActionReducer,
+} from "../navigation/reducers";
+
+import {
   setNotificationAction,
   clearNotificationAction,
 } from "../notification/actions";
@@ -41,7 +50,8 @@ import {
   Business,
   Notification,
   ShoppingCart,
-} from "../../common/types/api/types";
+  NavigationTrack,
+} from "../../common/types/api/types.d";
 import { ActionStageEnum } from "../../common/types/api/enums.d";
 
 /**
@@ -55,7 +65,7 @@ export interface MutableStoreState {
   shoppingCart: ShoppingCart;
   notification: Notification;
   business: Business;
-  actionTracker: any;
+  navigationTrack: NavigationTrack;
   error: any;
 }
 
@@ -79,16 +89,27 @@ const INITIAL_STATE: StoreState = produce(
       description: "",
     },
     business: {},
-    actionTracker: {
-      currentSelection: {
-        category: null,
-      },
+    navigationTrack: {
+      category_slug: null,
+      product_id: null,
     },
   },
   (draft: MutableStoreState) => draft
 );
 
 export const reducer = reducerWithInitialState(INITIAL_STATE);
+
+/**
+ * Navigation Track reducers
+ */
+reducer.case(
+  setNavigationTrackCategorySlugAction,
+  setNavigationTrackCategorySlugActionReducer
+);
+reducer.case(
+  setNavigationTrackProductIdAction,
+  setNavigationTrackProductIdActionReducer
+);
 
 /**
  * Notification reducers
