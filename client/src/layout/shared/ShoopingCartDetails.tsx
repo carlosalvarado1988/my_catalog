@@ -9,7 +9,6 @@ import {
   selectShowShoppingCart,
   selectShoppingCart,
 } from "../../redux/shopping-cart/selectors";
-// import { shoppingCartMocked } from "../../redux/tempMockData";
 import { ShoppingCart, OrderItem } from "../../common/types/api/types";
 const { Panel } = Collapse;
 
@@ -43,17 +42,18 @@ export const ShoopingCartDetails = React.memo(function Component() {
   const ItemCard = ({
     product_id,
     product_name,
-    qty,
-    unit_price,
+    price,
+    count,
+    total,
   }: OrderItem) => {
     return (
       <ItemRow>
         <div className="title-name">
-          {product_name} <span className="unit-price">- ${unit_price}</span>
+          {product_name} <span className="unit-price">- ${price}</span>
         </div>
         <div></div>
-        <div className="title-qty">{qty}</div>
-        <div className="title-total">${qty * unit_price}</div>
+        <div className="title-qty">{count}</div>
+        <div className="title-total">${total}</div>
       </ItemRow>
     );
   };
@@ -88,8 +88,9 @@ export const ShoopingCartDetails = React.memo(function Component() {
                   <ItemCard
                     product_id={item.product_id}
                     product_name={item.product_name}
-                    qty={item.qty}
-                    unit_price={item.unit_price}
+                    count={item.count}
+                    price={item.price}
+                    total={item.total}
                   />
                 }
               >
@@ -127,7 +128,6 @@ export const ShoopingCartDetails = React.memo(function Component() {
 const Wrapper = styled.div`
   margin-top: -35px;
   min-height: 100%;
-  /* padding: 0 0 10px 0; */
   box-sizing: border-box;
 
   .collapse-hidden-container {

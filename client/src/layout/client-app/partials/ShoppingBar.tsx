@@ -1,5 +1,6 @@
 import React from "react";
 import { Badge } from "antd";
+import { isEmpty } from "lodash";
 import { useHistory } from "react-router-dom";
 import { ShoppingCartOutlined, RollbackOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,13 +8,17 @@ import styled, { css } from "styled-components";
 
 import { AddProduct } from "../partials/AddProduct";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
-import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
+import {
+  selectShowShoppingCart,
+  selectShoppingCart,
+} from "../../../redux/shopping-cart/selectors";
 import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
 
 export const ShoppingBar = React.memo(function Component() {
   const dispatch = useDispatch();
   const history = useHistory();
   const showShoppingCart = useSelector(selectShowShoppingCart);
+  const { items } = useSelector(selectShoppingCart);
   const {
     valid_business,
     business_slug,
@@ -39,11 +44,11 @@ export const ShoppingBar = React.memo(function Component() {
         className="order"
         onClick={() => dispatch(toogleShowShoopingCartAction())}
       >
-        <StyledBadge count={showShoppingCart ? 0 : 3}>
+        <StyledBadge count={showShoppingCart ? 0 : items?.length}>
           {showShoppingCart ? (
             <StyledRollbackOutlined />
           ) : (
-            <StyledShoppingCart />
+            <StyledShoppingCart added={isEmpty(items)} />
           )}
         </StyledBadge>
       </div>
@@ -61,12 +66,16 @@ const baseIconSizes = css`
 const StyledRollbackOutlined = styled(RollbackOutlined)`
   ${baseIconSizes}
 `;
-const StyledShoppingCart = styled(ShoppingCartOutlined)`
+interface Prop {
+  added: boolean;
+}
+const StyledShoppingCart = styled(ShoppingCartOutlined)<Prop>`
   ${baseIconSizes}
+  color: ${({ added }) => (added ? "inherit" : "white")};
 `;
 const StyledBadge = styled(Badge)`
   ${baseIconSizes}
-  margin-top: 10px;
+  margin-top: 5px;
   cursor: pointer;
   &:hover {
     color: white;

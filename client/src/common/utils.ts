@@ -1,3 +1,9 @@
+import { OrderItem } from "./types/api/types";
+
+export function getTotalAmountShoopingCart(items: OrderItem[]): number {
+  return items?.map((i) => i.total).reduce((a, b) => a + b, 0);
+}
+
 // import { unix } from "moment";
 
 // export const convertTimestampToDate = (value?: number) =>

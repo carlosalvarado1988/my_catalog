@@ -25,8 +25,14 @@ import {
   getBusinessActionFailed,
 } from "../business/reducers";
 
-import { toogleShowShoopingCartAction } from "../shopping-cart/actions";
-import { toogleShowShoopingCartActionReducer } from "../shopping-cart/reducers";
+import {
+  toogleShowShoopingCartAction,
+  addProductItemToShoppingCartAction,
+} from "../shopping-cart/actions";
+import {
+  toogleShowShoopingCartActionReducer,
+  addProductItemToShoppingCartActionReducer,
+} from "../shopping-cart/reducers";
 
 import {
   setNavigationTrackCategorySlugAction,
@@ -79,8 +85,8 @@ const INITIAL_STATE: StoreState = produce(
     showShoppingCart: false,
     shoppingCart: {
       business_id: null,
-      amount: 0,
       items: [],
+      amount: 0,
     },
     notification: {
       show: false,
@@ -121,6 +127,10 @@ reducer.case(clearNotificationAction, clearNotificationActionReducer);
  * Shooping-cart reducers
  */
 reducer.case(toogleShowShoopingCartAction, toogleShowShoopingCartActionReducer);
+reducer.case(
+  addProductItemToShoppingCartAction,
+  addProductItemToShoppingCartActionReducer
+);
 
 /**
  * Business reducers

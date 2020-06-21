@@ -82,11 +82,12 @@ export type Business = {
 export type OrderItem = {
   product_id: number;
   product_name: string;
-  unit_price: number;
-  qty: number;
+  price: number;
+  count: number;
+  total: number;
 };
 export type ShoppingCart = {
-  business_id?: number;
+  business_id: number | null;
   amount: number;
   items?: OrderItem[];
 };
@@ -127,7 +128,13 @@ export type Notification = {
   message: string;
   description?: string;
 };
-s;
+
+// Shopping Cart //
+
+export type AddItemShoppingCart = {
+  product: Product;
+  qty: number;
+};
 // API PAYLOADS //
 /**
  * Business
