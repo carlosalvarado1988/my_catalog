@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
-import styled from "styled-components";
+import { Carousel } from "antd";
 import { isEmpty, get, map } from "lodash";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 import { InvalidLink } from "../partials/InvalidLink";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
@@ -26,16 +27,19 @@ export const ProductsCategoryList = () => {
       </header>
       <main className="grid-items-list">
         {map(category?.products, (product: Product, i: number) => (
-          <div
-            className="grid-item"
-            key={i}
-            onClick={(e) => {
-              e.preventDefault();
-              handleGoProduct(product.product_id);
-            }}
-          >
-            <div className="card">
-              <img src={product.images[0].url} alt="img-1"></img>
+          <div className="grid-item" key={i}>
+            <div
+              className="card"
+              onClick={(e) => {
+                e.preventDefault();
+                handleGoProduct(product.product_id);
+              }}
+            >
+              <Carousel dotPosition={"top"}>
+                {map(product.images, (img, i) => {
+                  return <img src={img.url} alt="img-1"></img>;
+                })}
+              </Carousel>
               <div className="details">
                 <h5>Product Name</h5>
                 <p>
@@ -61,7 +65,6 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 
   .grid-item {
-    /* padding-top: 30px; */
     border: unset;
     border-radius: unset;
     :hover,
@@ -74,7 +77,7 @@ const Wrapper = styled.div`
       object-fit: cover;
       width: 100%;
       height: 278px;
-      border-radius: 5px;
+      border-radius: 5px 5px 0 0;
     }
 
     .details {
@@ -95,11 +98,13 @@ const Wrapper = styled.div`
     }
     .grid-item {
       img {
-        margin-top: -15px;
         height: 228px;
       }
       .card {
-        padding: 5px;
+        padding: 0;
+        .ant-carousel .slick-slider .slick-list {
+          border-radius: 5px 5px 0 0;
+        }
       }
       .details {
         margin-top: 5px;

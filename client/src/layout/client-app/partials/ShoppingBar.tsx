@@ -48,7 +48,7 @@ export const ShoppingBar = React.memo(function Component() {
           {showShoppingCart ? (
             <StyledRollbackOutlined />
           ) : (
-            <StyledShoppingCart added={isEmpty(items)} />
+            <StyledShoppingCart added={isEmpty(items).toString()} />
           )}
         </StyledBadge>
       </div>
@@ -67,11 +67,11 @@ const StyledRollbackOutlined = styled(RollbackOutlined)`
   ${baseIconSizes}
 `;
 interface Prop {
-  added: boolean;
+  added: string;
 }
 const StyledShoppingCart = styled(ShoppingCartOutlined)<Prop>`
   ${baseIconSizes}
-  color: ${({ added }) => (added ? "inherit" : "white")};
+  color: ${({ added }) => (added === "true" ? "inherit" : "white")};
 `;
 const StyledBadge = styled(Badge)`
   ${baseIconSizes}

@@ -8,7 +8,6 @@ import { addProductItemToShoppingCartAction } from "../../../redux/shopping-cart
 
 export const AddProduct = React.memo(function Component() {
   const { valid_product, product } = useBusinessInventory();
-  console.log("product: ", product);
   const dispatch = useDispatch();
   let [count, setCount] = useState(1);
   return (
