@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse } from "antd";
+import { Collapse, Button } from "antd";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
@@ -11,9 +11,25 @@ import {
 } from "../../redux/shopping-cart/selectors";
 import { OrderItem } from "../../common/types/api/types";
 import { ProceedCheckout } from "../client-app/partials/ProceedCheckout";
+import { AddProduct } from "../client-app/partials/AddProduct";
 const { Panel } = Collapse;
 
-export const ShoopingCartDetails = React.memo(function Component() {
+interface EditItemProp {
+  product_id: number;
+  product_name: string;
+  category_slug: string;
+  category_name: string;
+  total: number;
+}
+
+interface ItemCardProp {
+  product_name: string;
+  price: number;
+  count: number;
+  total: number;
+}
+
+export const ShoppingCartDetails = React.memo(function Component() {
   const showShoppingCart = useSelector(selectShowShoppingCart);
   const shoppingItems: OrderItem[] = useSelector(
     selectItemsShoppingCart
@@ -37,13 +53,7 @@ export const ShoopingCartDetails = React.memo(function Component() {
       </div>
     );
 
-  const ItemCard = ({
-    product_id,
-    product_name,
-    price,
-    count,
-    total,
-  }: OrderItem) => {
+  const ItemCard = ({ product_name, price, count, total }: ItemCardProp) => {
     return (
       <ItemRow>
         <div className="title-name">
@@ -56,8 +66,30 @@ export const ShoopingCartDetails = React.memo(function Component() {
     );
   };
 
-  const EditItem = () => {
-    return <div className="edit-item">Component for edit quantity</div>;
+  const EditItem = ({
+    product_id,
+    product_name,
+    category_slug,
+    category_name,
+    total,
+  }: EditItemProp) => {
+    return (
+      <div className="edit-item">
+        <div className="details-remove">
+          <span>
+            <p className="product-name">{product_name}</p>
+            <p className="category-name">{category_name}</p>
+          </span>
+          <Button>Borrar</Button>
+        </div>
+        <div className="update-item">
+          <AddProduct
+            product_id={product_id.toString()}
+            category_slug={category_slug}
+          />
+        </div>
+      </div>
+    );
   };
 
   const CollapsibleItemsSection = () => {
@@ -84,7 +116,6 @@ export const ShoopingCartDetails = React.memo(function Component() {
                 key={item.product_id}
                 header={
                   <ItemCard
-                    product_id={item.product_id}
                     product_name={item.product_name}
                     count={item.count}
                     price={item.price}
@@ -92,7 +123,13 @@ export const ShoopingCartDetails = React.memo(function Component() {
                   />
                 }
               >
-                <EditItem />
+                <EditItem
+                  product_id={item.product_id}
+                  product_name={item.product_name}
+                  category_slug={item.category_slug}
+                  category_name={item.category_name}
+                  total={item.total}
+                />
               </Panel>
             </Collapse>
           ))}
@@ -167,6 +204,25 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     margin: 20px auto 10px;
+  }
+  .edit-item {
+    .details-remove {
+      display: flex;
+      justify-content: space-between;
+      .product-name {
+        color: white;
+        font-size: 1.5rem;
+      }
+      .category-name {
+        font-size: 1rem;
+        font-style: italic;
+      }
+    }
+    .update-item {
+      margin-top: 65px;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 600px) {

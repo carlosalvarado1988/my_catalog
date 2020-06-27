@@ -14,7 +14,7 @@ export const ProceedCheckout = React.memo(function Component() {
           e.preventDefault();
         }}
       >
-        Solicitar Entrega por ${amount}
+        Solicitar Entrega / ${amount}
       </Button>
     </Wrapper>
   );
@@ -23,5 +23,7 @@ export const ProceedCheckout = React.memo(function Component() {
 const Wrapper = styled.div`
   .button {
     border-radius: 20px;
+    /* font-weight: bold; */
+    color: white;
   }
 `;

@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { findIndex, isEmpty } from "lodash";
+import { findIndex } from "lodash";
 import { MutableStoreState } from "../root/reducer";
 import { getTotalAmountShoopingCart } from "../../common/utils";
 import { ShoppingCart, OrderItem } from "../../common/types/api/types";

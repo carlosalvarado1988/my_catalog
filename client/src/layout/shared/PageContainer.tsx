@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 
 import { selectShowShoppingCart } from "../../redux/shopping-cart/selectors";
 import { Routes } from "../Routes";
+import { useBusinessInventory } from "../client-app/hooks/useBusinessInventory";
 
 export const PageContainer = React.memo(function Component() {
   const showShoppingCart = useSelector(selectShowShoppingCart);
+  const { valid_product } = useBusinessInventory();
   return (
-    <Wrapper hide={showShoppingCart}>
+    <Wrapper hide={showShoppingCart} product_page={valid_product}>
       <Routes />
     </Wrapper>
   );
@@ -16,6 +18,7 @@ export const PageContainer = React.memo(function Component() {
 
 interface Prop {
   hide: boolean;
+  product_page: boolean;
 }
 
 const Wrapper = styled.main<Prop>`
@@ -28,9 +31,14 @@ const Wrapper = styled.main<Prop>`
   box-sizing: border-box;
 
   @media (max-width: 600px) {
-    height: calc(
-      100vh - (var(--search-web-mobile) + var(--bar-height-web-mobile))
-    );
     padding: 5px 15px;
+    height: ${({ product_page }) =>
+      product_page
+        ? `calc(
+      100vh - (var(--search-web-mobile) + var(--bar-height-web-mobile) + var(--counter-add-product-height))
+    )`
+        : `calc(
+      100vh - (var(--search-web-mobile) + var(--bar-height-web-mobile))
+    )`};
   }
 `;

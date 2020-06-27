@@ -7,12 +7,16 @@ import {
   selectProductId,
 } from "../../../redux/navigation/selectors";
 import { selectBusiness } from "../../../redux/business/selectors";
-
 import { Business, Category, Product } from "../../../common/types/api/types";
 
-export const useBusinessInventory = () => {
-  const category_slug_redux = useSelector(selectCategorySlug);
-  const product_id_redux = useSelector(selectProductId);
+export const useBusinessInventory = (
+  product_id?: string | null,
+  category_slug?: string | null
+) => {
+  const product_id_redux: string | null = useSelector(selectProductId);
+  const category_slug_redux: string | null = useSelector(selectCategorySlug);
+  const productId = product_id || product_id_redux;
+  const categorySlug = category_slug || category_slug_redux;
 
   const {
     business_account_id,
@@ -47,23 +51,22 @@ export const useBusinessInventory = () => {
   );
 
   const category: Category = useMemo(() => {
-    return isEmpty(category_slug_redux)
+    return isEmpty(categorySlug)
       ? ({} as Category)
       : (filter(
           categories,
-          (cat: Category) => cat.slug === category_slug_redux
+          (cat: Category) => cat.slug === categorySlug
         )[0] as Category) || ({} as Category);
-  }, [categories, category_slug_redux]);
+  }, [categories, categorySlug]);
 
   const product: Product = useMemo(() => {
-    return isEmpty(product_id_redux)
+    return isEmpty(productId)
       ? ({} as Product)
       : filter(
           category.products,
-          (prod: Product) =>
-            prod.product_id.toString() === product_id_redux?.toString()
+          (prod: Product) => prod.product_id.toString() === productId
         )[0] || ({} as Product);
-  }, [category, product_id_redux]);
+  }, [category, productId]);
 
   const valid_business: boolean = !isEmpty(categories);
   const valid_category: boolean = !isEmpty(category);
@@ -75,10 +78,10 @@ export const useBusinessInventory = () => {
     business_details,
     categories,
     valid_category,
-    category_slug: category_slug_redux,
+    category_slug: categorySlug,
     category,
     valid_product,
     product,
-    product_id: product_id_redux,
+    product_id: productId,
   };
 };

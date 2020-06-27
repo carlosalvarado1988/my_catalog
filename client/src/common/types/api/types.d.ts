@@ -81,6 +81,8 @@ export type Business = {
 };
 export type OrderItem = {
   product_id: number;
+  category_slug: string;
+  category_name: string;
   product_name: string;
   price: number;
   count: number;

@@ -43,7 +43,7 @@ const products: Product[] = [
     product_id: 1,
     product_name: "botella decorada",
     slug: "botella-decorada",
-    price: 7.0,
+    price: 7.25,
     stock: 8,
     description: "una botella de vidrio con decoracion naumTil",
     product_category_id: 1,
@@ -90,7 +90,7 @@ const products: Product[] = [
     product_id: 2,
     product_name: "almoadas decoradas",
     slug: "almoadas-decorada",
-    price: 4.0,
+    price: 4.25,
     stock: 8,
     description: "una decorada con decoracion naumTil",
     product_category_id: 1,
@@ -190,6 +190,8 @@ export const shoppingCartMocked: ShoppingCart = {
       price: 10,
       count: 3,
       total: 30,
+      category_slug: "adornos-para-el-hogar",
+      category_name: "Adornos para el hogar",
     },
     {
       product_id: 2,
@@ -197,6 +199,8 @@ export const shoppingCartMocked: ShoppingCart = {
       price: 4,
       count: 3,
       total: 12,
+      category_slug: "adornos-para-el-hogar",
+      category_name: "Adornos para el hogar",
     },
     {
       product_id: 3,
@@ -204,6 +208,8 @@ export const shoppingCartMocked: ShoppingCart = {
       price: 5,
       count: 3,
       total: 15,
+      category_slug: "adornos-para-el-hogar",
+      category_name: "Adornos para el hogar",
     },
     {
       product_id: 4,
@@ -211,6 +217,8 @@ export const shoppingCartMocked: ShoppingCart = {
       price: 10,
       count: 3,
       total: 30,
+      category_slug: "adornos-para-el-hogar",
+      category_name: "Adornos para el hogar",
     },
     {
       product_id: 5,
@@ -218,19 +226,9 @@ export const shoppingCartMocked: ShoppingCart = {
       price: 10,
       count: 3,
       total: 30,
+      category_slug: "adornos-para-el-hogar",
+      category_name: "Adornos para el hogar",
     },
-    // {
-    //   product_id: 6, product_name: "refrigerador frio-seco multifuncion doble",
-    //   price: 10,
-    //   count: 3,
-    // total: 30,
-    // },
-    // {
-    //   product_id: 7, product_name: "refrigerador frio-seco multifuncion doble",
-    //   price: 10,
-    //   count: 3,
-    // total: 30,
-    // },
   ],
 };
 
