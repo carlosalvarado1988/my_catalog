@@ -1,16 +1,21 @@
 import React from "react";
-import { Badge } from "antd";
-import { isEmpty } from "lodash";
 import { useHistory } from "react-router-dom";
-import { ShoppingCartOutlined, RollbackOutlined } from "@ant-design/icons";
+import { Avatar, Badge } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
+import {
+  ShoppingCartOutlined,
+  RollbackOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 import { AddProduct } from "../partials/AddProduct";
+import { ProceedCheckout } from "../partials/ProceedCheckout";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import {
   selectShowShoppingCart,
-  selectShoppingCart,
+  selectIsEmptyShoppingCart,
+  selectItemsCountShoppingCart,
 } from "../../../redux/shopping-cart/selectors";
 import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
 
@@ -18,7 +23,9 @@ export const ShoppingBar = React.memo(function Component() {
   const dispatch = useDispatch();
   const history = useHistory();
   const showShoppingCart = useSelector(selectShowShoppingCart);
-  const { items } = useSelector(selectShoppingCart);
+  const isEmptyShoppingCart = useSelector(selectIsEmptyShoppingCart);
+  const itemsCount = useSelector(selectItemsCountShoppingCart);
+
   const {
     valid_business,
     business_slug,
@@ -32,23 +39,31 @@ export const ShoppingBar = React.memo(function Component() {
       <h2 className="bizz-title">{business_details.name}</h2>
     </div>
   );
+  const showBusinessName =
+    valid_business && !valid_product && !showShoppingCart;
+  const showAddProduct = valid_product && !showShoppingCart;
 
   return (
     <Wrapper showingCart={showShoppingCart}>
-      <div className="left">
-        {valid_business && !valid_product && <BusinessName />}
-        {valid_product && <AddProduct />}
+      <div className="user-avatar">
+        <Avatar icon={<UserOutlined />} />
+      </div>
+
+      <div className="center-dynamic-section">
+        {showBusinessName && <BusinessName />}
+        {showAddProduct && <AddProduct />}
+        {showShoppingCart && <ProceedCheckout />}
       </div>
 
       <div
-        className="order"
+        className="shopping-cart"
         onClick={() => dispatch(toogleShowShoopingCartAction())}
       >
-        <StyledBadge count={showShoppingCart ? 0 : items?.length}>
+        <StyledBadge count={showShoppingCart ? 0 : itemsCount}>
           {showShoppingCart ? (
             <StyledRollbackOutlined />
           ) : (
-            <StyledShoppingCart added={isEmpty(items).toString()} />
+            <StyledShoppingCart added={isEmptyShoppingCart.toString()} />
           )}
         </StyledBadge>
       </div>
@@ -94,35 +109,38 @@ const Wrapper = styled.div<Props>`
   margin: 0 auto;
   padding: 15px 30px;
   box-sizing: border-box;
-  .left {
+
+  .user-avatar {
     display: flex;
     align-items: center;
-  }
-  .pre-title {
-    font-size: 1rem;
-    margin: 0px;
-  }
-  .bizz-title {
-    margin: 0 0 0 10px;
-    font-size: 2.5rem;
   }
 
-  .order {
+  .center-dynamic-section {
     display: flex;
+    width: 100%;
     align-items: center;
-    margin-right: 10px;
-    font-size: 32px;
-    color: ${({ showingCart }) => (showingCart ? `inherit` : "blue")};
-    .shopping-cart {
-      text-decoration: underline;
-      color: inherit;
-      font-style: none;
+    justify-content: center;
+    .brand {
+      .pre-title {
+        font-size: 1rem;
+        margin: 0px;
+      }
+      .bizz-title {
+        margin: 0 0 0 10px;
+        font-size: 2.5rem;
+      }
     }
+  }
+  .shopping-cart {
+    margin-right: 10px;
+    background-color: transparent;
+    border: 0;
+    color: ${({ showingCart }) => (showingCart ? `inherit` : "blue")};
   }
 
   @media (max-width: 600px) {
     padding: 0 10px;
-    .bizz-title {
+    .center-dynamic-section .brand .bizz-title {
       margin-left: 5px;
       font-size: 1.6rem;
     }

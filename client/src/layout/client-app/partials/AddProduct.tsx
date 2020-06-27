@@ -94,7 +94,7 @@ const Wrapper = styled.div`
     }
   }
   .add-item-button {
-    margin-left: 20px;
+    margin-left: 15px;
     border-radius: 20px;
   }
 `;

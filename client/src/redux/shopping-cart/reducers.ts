@@ -16,15 +16,20 @@ export const addProductItemToShoppingCartActionReducer = (
   payload: OrderItem
 ) =>
   produce(state, (draft: MutableStoreState) => {
-    upsertItemInShoppingCart(draft.shoppingCart, payload);
+    upsertItemInShoppingCart(
+      draft.shoppingCart,
+      draft.shoppingCart.items || [],
+      payload
+    );
   });
 
 function upsertItemInShoppingCart(
   shoppingCart: ShoppingCart,
+  items: OrderItem[],
   payload: OrderItem
 ): void {
-  const index = findIndex(shoppingCart.items, payload);
-  if (isEmpty(index)) {
+  const index = findIndex(items, { product_id: payload.product_id });
+  if (index >= 0) {
     shoppingCart.items?.splice(index, 1, payload);
   } else {
     shoppingCart.items?.push(payload);

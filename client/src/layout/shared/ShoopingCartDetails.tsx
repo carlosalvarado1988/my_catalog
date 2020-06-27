@@ -7,17 +7,18 @@ import { isEmpty, map } from "lodash";
 
 import {
   selectShowShoppingCart,
-  selectShoppingCart,
+  selectItemsShoppingCart,
 } from "../../redux/shopping-cart/selectors";
-import { ShoppingCart, OrderItem } from "../../common/types/api/types";
+import { OrderItem } from "../../common/types/api/types";
+import { ProceedCheckout } from "../client-app/partials/ProceedCheckout";
 const { Panel } = Collapse;
 
 export const ShoopingCartDetails = React.memo(function Component() {
   const showShoppingCart = useSelector(selectShowShoppingCart);
-  const shoppingCart: ShoppingCart = useSelector(
-    selectShoppingCart
-  ) as ShoppingCart;
-  const emptyItems = isEmpty(shoppingCart.items);
+  const shoppingItems: OrderItem[] = useSelector(
+    selectItemsShoppingCart
+  ) as OrderItem[];
+  const emptyItems = isEmpty(shoppingItems);
 
   const TableTitleCart = () =>
     emptyItems ? null : (
@@ -31,12 +32,9 @@ export const ShoopingCartDetails = React.memo(function Component() {
 
   const TotalPayCart = () =>
     emptyItems ? null : (
-      <ItemRow className="grand-total">
-        <div></div>
-        <div></div>
-        <div>Total:</div>
-        <div>${shoppingCart.amount}</div>
-      </ItemRow>
+      <div className="request-delivery">
+        <ProceedCheckout />
+      </div>
     );
 
   const ItemCard = ({
@@ -69,7 +67,7 @@ export const ShoopingCartDetails = React.memo(function Component() {
           <h5 className="empty-cart">No has agregado un articulo aun</h5>
         )}
         {!emptyItems &&
-          map(shoppingCart.items, (item: OrderItem, i: number) => (
+          map(shoppingItems, (item: OrderItem, i: number) => (
             <Collapse
               className="collapse-item-container"
               expandIcon={({ isActive }) => (
@@ -133,14 +131,12 @@ const Wrapper = styled.div`
   .collapse-hidden-container {
     background-color: var(--bg-color-2);
     .panel-hidden-container {
+      overflow-y: auto;
       max-width: var(--max-width-content);
       margin: 0 auto;
       border-bottom: none;
+      max-height: calc(100vh - var(--bar-height-web));
     }
-  }
-  .empty-cart {
-    text-align: center;
-    margin-top: 20px;
   }
   .collapse-item-container {
     margin-bottom: 5px;
@@ -155,10 +151,30 @@ const Wrapper = styled.div`
           font-size: 2rem;
         }
       }
+
+      .ant-collapse-content .ant-collapse-content-active {
+        max-height: calc(100vh - 50px);
+        background-color: red;
+        padding-bottom: 50px;
+      }
     }
+  }
+  .empty-cart {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .request-delivery {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 10px;
   }
 
   @media (max-width: 600px) {
+    .collapse-hidden-container {
+      .panel-hidden-container {
+        max-height: calc(100vh - var(--bar-height-web-mobile));
+      }
+    }
     .collapse-item-container {
       .panel-item-container {
         .ant-collapse-header {
@@ -180,18 +196,13 @@ const ItemRow = styled.div`
   min-height: 10px;
   text-align: center;
   font-size: 1.8rem;
-  &.title,
-  &.grand-total {
+
+  &.title {
     padding: 10px 0 10px 25px;
-    /* border-bottom: 1.5px solid lightcoral; */
     font-size: 2rem;
     margin-bottom: 5px;
   }
-  &.grand-total {
-    margin-top: 5px;
-    /* border-top: 1.5px solid lightcoral; */
-    border-bottom: none;
-  }
+
   > div {
     width: 30%;
     :first-of-type {
