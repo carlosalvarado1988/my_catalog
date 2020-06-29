@@ -47,8 +47,12 @@ export const ProductDescription = React.memo(function Component() {
     <Wrapper>
       <h1>{product.product_name}</h1>
       <div className="details-section">
-        <div>description: {product.description}</div>
-        <div>price: {product.price}</div>
+        <div>
+          <p>{product.description}</p>
+        </div>
+        <div>
+          <h5>Price: {product.price}</h5>
+        </div>
       </div>
       <div className="gallery-section">
         <Gallery images={images} />

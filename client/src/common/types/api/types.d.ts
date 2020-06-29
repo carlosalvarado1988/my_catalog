@@ -30,6 +30,7 @@ export type Product = {
   slug: string;
   price: number;
   stock: number;
+  location: string[];
   description: string;
   product_category_id: number;
   images: Image[];

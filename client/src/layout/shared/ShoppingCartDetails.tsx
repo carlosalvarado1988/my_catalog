@@ -1,8 +1,8 @@
 import React from "react";
-import { Collapse, Button } from "antd";
+import { Collapse } from "antd";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteFilled } from "@ant-design/icons";
 import { isEmpty, map } from "lodash";
 
 import {
@@ -80,7 +80,12 @@ export const ShoppingCartDetails = React.memo(function Component() {
             <p className="product-name">{product_name}</p>
             <p className="category-name">{category_name}</p>
           </span>
-          <Button>Borrar</Button>
+          <div
+            className="delete-item"
+            onClick={() => console.log("delete item action")}
+          >
+            <DeleteFilled />
+          </div>
         </div>
         <div className="update-item">
           <AddProduct
@@ -216,6 +221,14 @@ const Wrapper = styled.div`
       .category-name {
         font-size: 1rem;
         font-style: italic;
+      }
+      .delete-item {
+        margin: 3px 0;
+        font-size: 2rem;
+        cursor: pointer;
+        :hover {
+          color: red;
+        }
       }
     }
     .update-item {

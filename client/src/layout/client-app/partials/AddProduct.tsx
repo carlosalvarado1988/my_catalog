@@ -8,6 +8,8 @@ import { filter, isEmpty } from "lodash";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import { addProductItemToShoppingCartAction } from "../../../redux/shopping-cart/actions";
 import { selectItemsShoppingCart } from "../../../redux/shopping-cart/selectors";
+import { convertNumberToCurrency } from "../../../common/utils";
+import { CurrenciesEnum } from "../../../common/types/api/enums.d";
 
 interface Props {
   product_id?: string;
@@ -99,8 +101,8 @@ export const AddProduct = React.memo(function Component({
           );
         }}
       >
-        {isEmpty(productInCart) ? `Reservar ` : `Actualizar `}/ $
-        {calculated_total}
+        {isEmpty(productInCart) ? `Reservar ` : `Actualizar `}
+        {`/ ${convertNumberToCurrency(calculated_total, CurrenciesEnum.USD)}`}
       </Button>
     </Wrapper>
   );

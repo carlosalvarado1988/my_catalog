@@ -1,4 +1,5 @@
 import { OrderItem } from "./types/api/types";
+import { CurrenciesEnum } from "./types/api/enums.d";
 
 export function getTotalAmountShoopingCart(items: OrderItem[]): number {
   return items?.map((i) => i.total).reduce((a, b) => a + b, 0);
@@ -9,41 +10,41 @@ export function getTotalAmountShoopingCart(items: OrderItem[]): number {
 // export const convertTimestampToDate = (value?: number) =>
 //   value ? unix(value).format("MM/DD/YYYY") : "";
 
-// /**
-//  * convertNumberToCurrency
-//  *
-//  * Converts a passed currency value to a formatted expression of the currency
-//  * for the pass country (type).
-//  * ie - 1000, USD is converted to $10.00
-//  *
-//  * More supported currency types may be found at https://stripe.com/docs/currencies
-//  *
-//  * @param value The currency value
-//  * @param type The country the currency is from.
-//  */
-// export const convertNumberToCurrency = (
-//   value?: number,
-//   type?: CurrenciesEnum,
-// ) => {
-//   let formatter: Intl.NumberFormat
-//   value = value || 0
-//   switch (type) {
-//     case CurrenciesEnum.EUR:
-//       formatter = new Intl.NumberFormat(`de-DE`, {
-//         style: `currency`,
-//         currency: `EUR`,
-//       })
-//       return formatter.format(value / 100)
-//     case CurrenciesEnum.USD:
-//       formatter = new Intl.NumberFormat(`en-US`, {
-//         style: `currency`,
-//         currency: `USD`,
-//       })
-//       return formatter.format(value / 100)
-//     default:
-//       return value
-//   }
-// }
+/**
+ * convertNumberToCurrency
+ *
+ * Converts a passed currency value to a formatted expression of the currency
+ * for the pass country (type).
+ * ie - 1000, USD is converted to $10.00
+ *
+ * More supported currency types may be found at https://stripe.com/docs/currencies
+ *
+ * @param value The currency value
+ * @param type The country the currency is from.
+ */
+export const convertNumberToCurrency = (
+  value?: number,
+  type?: CurrenciesEnum
+) => {
+  let formatter: Intl.NumberFormat;
+  value = value || 0;
+  switch (type) {
+    case CurrenciesEnum.EUR:
+      formatter = new Intl.NumberFormat(`de-DE`, {
+        style: `currency`,
+        currency: `EUR`,
+      });
+      return formatter.format(value);
+    case CurrenciesEnum.USD:
+      formatter = new Intl.NumberFormat(`en-US`, {
+        style: `currency`,
+        currency: `USD`,
+      });
+      return formatter.format(value);
+    default:
+      return value;
+  }
+};
 
 export function getPageNoQuery(): string {
   // Get full URL
