@@ -12,6 +12,7 @@ import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import { Product } from "../../../common/types/api/types";
 import { convertNumberToCurrency } from "../../../common/utils";
 import { CurrenciesEnum } from "../../../common/types/api/enums.d";
+import { BackNavigationIcon } from "../partials/BackNavigationIcon";
 
 export const ProductsCategoryList = () => {
   const { business_slug, category, category_slug } = useBusinessInventory();
@@ -26,8 +27,11 @@ export const ProductsCategoryList = () => {
   return isEmpty(category) ? (
     <InvalidLink linkType={`Categorias`} />
   ) : (
-    <Wrapper id="products-list">
-      <header>
+    <Wrapper>
+      <header className="title">
+        <span className="desktop-show-only">
+          <BackNavigationIcon />
+        </span>
         <h1>{CategoryName}</h1>
       </header>
       <main className="grid-items-list">
@@ -94,7 +98,10 @@ const Wrapper = styled.div`
   min-height: 100%;
   padding: 10px 0;
   box-sizing: border-box;
-
+  .title {
+    display: flex;
+    align-items: center;
+  }
   .grid-item {
     border: unset;
     border-radius: unset;

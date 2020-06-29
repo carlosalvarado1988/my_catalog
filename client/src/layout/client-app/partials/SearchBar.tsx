@@ -1,32 +1,17 @@
 import React from "react";
 import { Input } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { LeftOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
-import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
+import styled from "styled-components";
+
+import { BackNavigationIcon } from "./BackNavigationIcon";
 
 const { Search } = Input;
 
 export const SearchBar = React.memo(function Component() {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const showShoppingChart = useSelector(selectShowShoppingCart);
-
-  const handleBack = () => {
-    console.log("showShoppingChart: ", showShoppingChart);
-    if (showShoppingChart) {
-      console.log("dispatch: toogleShowShoopingCartAction");
-      dispatch(toogleShowShoopingCartAction());
-    } else {
-      history.goBack();
-    }
-  };
-
   return (
     <Wrapper>
-      <StyledLeftOutlined onClick={() => handleBack()} />
+      <div className="mobile-show-only">
+        <BackNavigationIcon />
+      </div>
       <Search
         className="search-button"
         placeholder="Search"
@@ -43,19 +28,13 @@ const Wrapper = styled.div`
   .search-button {
     width: 100%;
     margin: 10px auto;
-    height: 30px;
+    height: 40px;
     border-radius: 50px;
   }
-`;
 
-const baseIconSizes = css`
-  font-size: 3.2rem;
   @media (max-width: 600px) {
-    font-size: 2rem;
+    .search-button {
+      height: 30px;
+    }
   }
-`;
-
-const StyledLeftOutlined = styled(LeftOutlined)`
-  ${baseIconSizes}
-  margin-right: 10px;
 `;

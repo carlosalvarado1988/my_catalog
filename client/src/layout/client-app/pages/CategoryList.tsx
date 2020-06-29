@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { startCase, map } from "lodash";
 
 import { InvalidLink } from "../partials/InvalidLink";
+import { BackNavigationIcon } from "../partials/BackNavigationIcon";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import { Category } from "../../../common/types/api/types.d";
 
@@ -19,7 +20,12 @@ export const CategoryList = React.memo(function Component() {
     <InvalidLink linkType={`Negocio`} />
   ) : (
     <Wrapper>
-      <h1>Categorias</h1>
+      <header className="title">
+        <span className="desktop-show-only">
+          <BackNavigationIcon />
+        </span>
+        <h1>Categorias</h1>
+      </header>
       <div className="grid-items-list">
         {map(categories, (category: Category, i: number) => (
           <section
@@ -46,7 +52,10 @@ const Wrapper = styled.div`
   min-height: 100%;
   padding: 10px 0;
   box-sizing: border-box;
-
+  .title {
+    display: flex;
+    align-items: center;
+  }
   .count {
     float: right;
     top: 0;

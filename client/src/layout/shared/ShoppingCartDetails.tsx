@@ -74,24 +74,26 @@ export const ShoppingCartDetails = React.memo(function Component() {
     total,
   }: EditItemProp) => {
     return (
-      <div className="edit-item">
-        <div className="details-remove">
-          <span>
-            <p className="product-name">{product_name}</p>
-            <p className="category-name">{category_name}</p>
-          </span>
-          <div
-            className="delete-item"
-            onClick={() => console.log("delete item action")}
-          >
-            <DeleteFilled />
+      <div className="edit-item-section">
+        <div className="edit-item">
+          <div className="details">
+            <span>
+              <p className="product-name">{product_name}</p>
+              <p className="category-name">{category_name}</p>
+            </span>
+          </div>
+          <div className="update-item">
+            <AddProduct
+              product_id={product_id.toString()}
+              category_slug={category_slug}
+            />
           </div>
         </div>
-        <div className="update-item">
-          <AddProduct
-            product_id={product_id.toString()}
-            category_slug={category_slug}
-          />
+        <div
+          className="delete-item"
+          onClick={() => console.log("delete item action")}
+        >
+          <DeleteFilled />
         </div>
       </div>
     );
@@ -166,7 +168,7 @@ export const ShoppingCartDetails = React.memo(function Component() {
 });
 
 const Wrapper = styled.div`
-  margin-top: -35px;
+  margin-top: -15px;
   min-height: 100%;
   box-sizing: border-box;
 
@@ -210,35 +212,41 @@ const Wrapper = styled.div`
     justify-content: center;
     margin: 20px auto 10px;
   }
-  .edit-item {
-    .details-remove {
-      display: flex;
-      justify-content: space-between;
-      .product-name {
-        color: white;
-        font-size: 1.5rem;
-      }
-      .category-name {
-        font-size: 1rem;
-        font-style: italic;
-      }
-      .delete-item {
-        margin: 3px 0;
-        font-size: 2rem;
-        cursor: pointer;
-        :hover {
-          color: red;
+  .edit-item-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .edit-item {
+      align-items: center;
+      width: 100%;
+      .details {
+        text-align: center;
+        .product-name {
+          color: white;
+        }
+        .category-name {
+          font-style: italic;
+          font-size: 1.5rem;
         }
       }
+      .update-item {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
     }
-    .update-item {
-      margin-top: 65px;
-      display: flex;
-      justify-content: center;
+    .delete-item {
+      margin: 5px 20px 5px 40px;
+      font-size: 2rem;
+      cursor: pointer;
+      :hover {
+        color: red;
+      }
     }
   }
 
   @media (max-width: 600px) {
+    margin-top: -35px;
     .collapse-hidden-container {
       .panel-hidden-container {
         max-height: calc(100vh - var(--bar-height-web-mobile));
@@ -251,6 +259,21 @@ const Wrapper = styled.div`
             margin-left: -10px;
             font-size: 1rem;
           }
+        }
+      }
+    }
+    .edit-item-section {
+      .edit-item {
+        .details {
+          .product-name {
+            font-size: 1.5rem;
+          }
+          .category-name {
+            font-size: 1rem;
+          }
+        }
+        .update-item {
+          margin-top: 65px;
         }
       }
     }

@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { InvalidLink } from "../partials/InvalidLink";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
+import { BackNavigationIcon } from "../partials/BackNavigationIcon";
 
 export const ProductDescription = React.memo(function Component() {
   const { product } = useBusinessInventory();
@@ -45,7 +46,12 @@ export const ProductDescription = React.memo(function Component() {
     <InvalidLink linkType={`Producto`} />
   ) : (
     <Wrapper>
-      <h1>{product.product_name}</h1>
+      <header className="title">
+        <span className="desktop-show-only">
+          <BackNavigationIcon />
+        </span>
+        <h1>{product.product_name}</h1>
+      </header>
       <div className="details-section">
         <div>
           <p>{product.description}</p>
@@ -62,6 +68,10 @@ export const ProductDescription = React.memo(function Component() {
 });
 
 const Wrapper = styled.div`
+  .title {
+    display: flex;
+    align-items: center;
+  }
   .gallery-section {
     display: block;
     margin-top: 10px;

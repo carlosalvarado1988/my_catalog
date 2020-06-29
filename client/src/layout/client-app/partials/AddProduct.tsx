@@ -109,16 +109,13 @@ export const AddProduct = React.memo(function Component({
 });
 
 const Wrapper = styled.div`
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
   .counter {
-    position: relative;
-    margin-top: -48px;
-    padding-bottom: 15px;
     .change-number {
       padding: 0;
-      height: 30px;
-      width: 30px;
+      height: 40px;
+      width: 50px;
       text-align: center;
       &.minus-button {
         border-radius: 40px 0 0 40px;
@@ -130,9 +127,10 @@ const Wrapper = styled.div`
       }
     }
     .counter-input {
-      height: 30px;
-      width: 52px;
-      padding: 0;
+      font-size: 1.8rem;
+      height: 40px;
+      min-width: 52px;
+      padding: 4px;
       box-sizing: border-box;
       .ant-input-number-input-wrap > input {
         text-align: center;
@@ -144,17 +142,36 @@ const Wrapper = styled.div`
     }
   }
   .add-item-button {
+    font-size: 1.8rem;
     border-radius: 20px;
-    min-width: 160px;
+    min-width: 200px;
+    margin-left: 20px;
+    height: 40px;
   }
 
-  /* @media (max-width: 350px) {
+  @media (max-width: 600px) {
+    display: block;
+    text-align: center;
     .counter {
-      position: fixed;
-      bottom: 65px;
+      position: relative;
+      margin-top: -48px;
+      padding-bottom: 15px;
+      .change-number {
+        height: 30px;
+        width: 30px;
+      }
+      .counter-input {
+        font-size: 1.5rem;
+        height: 30px;
+        width: 55px;
+        padding: 0;
+      }
     }
     .add-item-button {
+      min-width: 170px;
+      height: unset;
       margin-left: unset;
+      font-size: 1.4rem;
     }
-  } */
+  }
 `;

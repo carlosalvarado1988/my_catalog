@@ -9,11 +9,11 @@ export const NavBarContainer = React.memo(function Component() {
   const showShoppingCart = useSelector(selectShowShoppingCart);
   return (
     <Wrapper showingCart={showShoppingCart}>
-      <div className="mobile-show-only">
-        <SearchBar />
-      </div>
       <div className="desktop-show-only">
         <ShoppingBar />
+      </div>
+      <div className="mobile-show-only">
+        <SearchBar />
       </div>
     </Wrapper>
   );
