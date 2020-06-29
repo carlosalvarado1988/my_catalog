@@ -21,10 +21,12 @@ export const AddProduct = React.memo(function Component({
   category_slug,
 }: Props) {
   const dispatch = useDispatch();
-  const { category, valid_product, product } = useBusinessInventory(
-    product_id,
-    category_slug
-  );
+  const {
+    category,
+    valid_product,
+    product,
+    product_url,
+  } = useBusinessInventory(product_id, category_slug);
   const itemsShoppingCart = useSelector(selectItemsShoppingCart);
 
   const productInCart = useMemo(
@@ -96,6 +98,7 @@ export const AddProduct = React.memo(function Component({
               total: calculated_total,
               category_slug: category.slug,
               category_name: category.name,
+              product_url,
               count,
             })
           );

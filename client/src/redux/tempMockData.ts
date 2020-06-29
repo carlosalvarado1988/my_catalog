@@ -6,7 +6,6 @@ import {
   PickupSettings,
   PickupDayAvailability,
   Product,
-  ShoppingCart,
 } from "../common/types/api/types.d";
 
 // BASE OBJECT MODEL FOR AVAILABILITY
@@ -47,7 +46,7 @@ const products: Product[] = [
     stock: 8,
     location: ["santa tecla, merliot"],
     description:
-      "Excepteur sint occaecat cupidatat, dolore eu fugiat nulla pariatur non proident. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et fugiat nulla pariatur dolore magna aliqua. Irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "excepteur sint occaecat cupidatat, dolore eu fugiat nulla pariatur non proident. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et fugiat nulla pariatur dolore magna aliqua. Irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     product_category_id: 1,
     images: [
       {
@@ -96,7 +95,7 @@ const products: Product[] = [
     stock: 8,
     location: ["metrocentro, plaza merliot"],
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. In culpa qui officia deserunt mollit anim id est laborum.",
+      "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. In culpa qui officia deserunt mollit anim id est laborum.",
     product_category_id: 1,
     images: [
       {
@@ -136,7 +135,7 @@ const products: Product[] = [
 const categories: Category[] = [
   {
     product_category_id: 1,
-    name: "Adornos para el hogar ",
+    name: "adornos para el hogar ",
     slug: "adornos-para-el-hogar",
     description: "adornos para el hogar",
     products_count: 2,
@@ -147,7 +146,7 @@ const categories: Category[] = [
 const pickup_settings: PickupSettings = {
   santa_tecla: {
     pickup_id: 1,
-    address: "Centro comercial Merliot",
+    address: "centro comercial merliot",
     additional_reference: "porton 8",
     pickup_availability: available_monday_to_saturday,
   },
@@ -184,57 +183,57 @@ export const business_account: Business = {
   business_settings: business_settings,
 };
 
-export const shoppingCartMocked: ShoppingCart = {
-  business_id: 1,
-  amount: 50,
-  items: [
-    {
-      product_id: 1,
-      product_name: "refrigerador frio-seco multifuncion doble",
-      price: 10,
-      count: 3,
-      total: 30,
-      category_slug: "adornos-para-el-hogar",
-      category_name: "Adornos para el hogar",
-    },
-    {
-      product_id: 2,
-      product_name: "product name2",
-      price: 4,
-      count: 3,
-      total: 12,
-      category_slug: "adornos-para-el-hogar",
-      category_name: "Adornos para el hogar",
-    },
-    {
-      product_id: 3,
-      product_name: "product name3",
-      price: 5,
-      count: 3,
-      total: 15,
-      category_slug: "adornos-para-el-hogar",
-      category_name: "Adornos para el hogar",
-    },
-    {
-      product_id: 4,
-      product_name: "refrigerador frio-seco multifuncion doble",
-      price: 10,
-      count: 3,
-      total: 30,
-      category_slug: "adornos-para-el-hogar",
-      category_name: "Adornos para el hogar",
-    },
-    {
-      product_id: 5,
-      product_name: "refrigerador frio-seco multifuncion doble",
-      price: 10,
-      count: 3,
-      total: 30,
-      category_slug: "adornos-para-el-hogar",
-      category_name: "Adornos para el hogar",
-    },
-  ],
-};
+// export const shoppingCartMocked: ShoppingCart = {
+//   business_id: 1,
+//   amount: 50,
+//   items: [
+//     {
+//       product_id: 1,
+//       product_name: "refrigerador frio-seco multifuncion doble",
+//       price: 10,
+//       count: 3,
+//       total: 30,
+//       category_slug: "adornos-para-el-hogar",
+//       category_name: "adornos para el hogar",
+//     },
+//     {
+//       product_id: 2,
+//       product_name: "product name2",
+//       price: 4,
+//       count: 3,
+//       total: 12,
+//       category_slug: "adornos-para-el-hogar",
+//       category_name: "adornos para el hogar",
+//     },
+//     {
+//       product_id: 3,
+//       product_name: "product name3",
+//       price: 5,
+//       count: 3,
+//       total: 15,
+//       category_slug: "adornos-para-el-hogar",
+//       category_name: "adornos para el hogar",
+//     },
+//     {
+//       product_id: 4,
+//       product_name: "refrigerador frio-seco multifuncion doble",
+//       price: 10,
+//       count: 3,
+//       total: 30,
+//       category_slug: "adornos-para-el-hogar",
+//       category_name: "adornos para el hogar",
+//     },
+//     {
+//       product_id: 5,
+//       product_name: "refrigerador frio-seco multifuncion doble",
+//       price: 10,
+//       count: 3,
+//       total: 30,
+//       category_slug: "adornos-para-el-hogar",
+//       category_name: "adornos para el hogar",
+//     },
+//   ],
+// };
 
 // const aceites = [
 //   "https://cdn-3.expansion.mx/dims4/default/0961ae8/2147483647/strip/true/crop/1244x660+0+0/resize/800x424!/quality/90/?url=https%3A%2F%2Fcherry-brightspot.s3.amazonaws.com%2Fda%2Fe1%2F204261f7479581c4e8d6c9eedd7e%2Fwhdqw.JPG",

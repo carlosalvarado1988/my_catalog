@@ -72,6 +72,11 @@ export const useBusinessInventory = (
   const valid_category: boolean = !isEmpty(category);
   const valid_product: boolean = !isEmpty(product);
 
+  let product_url = "";
+  if (valid_business && valid_category && valid_product) {
+    product_url = `/${business_details?.slug}/${categorySlug}/${productId}`;
+  }
+
   return {
     valid_business,
     business_slug: business_details?.slug,
@@ -83,5 +88,6 @@ export const useBusinessInventory = (
     valid_product,
     product,
     product_id: productId,
+    product_url,
   };
 };

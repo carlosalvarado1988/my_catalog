@@ -2,7 +2,8 @@ import React from "react";
 import { Collapse } from "antd";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { EditOutlined, DeleteFilled } from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
+import { EditItemInCart } from "../client-app/partials/EditItemInCart";
 import { isEmpty, map } from "lodash";
 
 import {
@@ -11,16 +12,7 @@ import {
 } from "../../redux/shopping-cart/selectors";
 import { OrderItem } from "../../common/types/api/types";
 import { ProceedCheckout } from "../client-app/partials/ProceedCheckout";
-import { AddProduct } from "../client-app/partials/AddProduct";
 const { Panel } = Collapse;
-
-interface EditItemProp {
-  product_id: number;
-  product_name: string;
-  category_slug: string;
-  category_name: string;
-  total: number;
-}
 
 interface ItemCardProp {
   product_name: string;
@@ -66,39 +58,6 @@ export const ShoppingCartDetails = React.memo(function Component() {
     );
   };
 
-  const EditItem = ({
-    product_id,
-    product_name,
-    category_slug,
-    category_name,
-    total,
-  }: EditItemProp) => {
-    return (
-      <div className="edit-item-section">
-        <div className="edit-item">
-          <div className="details">
-            <span>
-              <p className="product-name">{product_name}</p>
-              <p className="category-name">{category_name}</p>
-            </span>
-          </div>
-          <div className="update-item">
-            <AddProduct
-              product_id={product_id.toString()}
-              category_slug={category_slug}
-            />
-          </div>
-        </div>
-        <div
-          className="delete-item"
-          onClick={() => console.log("delete item action")}
-        >
-          <DeleteFilled />
-        </div>
-      </div>
-    );
-  };
-
   const CollapsibleItemsSection = () => {
     return (
       <section>
@@ -130,12 +89,12 @@ export const ShoppingCartDetails = React.memo(function Component() {
                   />
                 }
               >
-                <EditItem
+                <EditItemInCart
                   product_id={item.product_id}
                   product_name={item.product_name}
                   category_slug={item.category_slug}
                   category_name={item.category_name}
-                  total={item.total}
+                  product_url={item.product_url}
                 />
               </Panel>
             </Collapse>
@@ -212,38 +171,6 @@ const Wrapper = styled.div`
     justify-content: center;
     margin: 20px auto 10px;
   }
-  .edit-item-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .edit-item {
-      align-items: center;
-      width: 100%;
-      .details {
-        text-align: center;
-        .product-name {
-          color: white;
-        }
-        .category-name {
-          font-style: italic;
-          font-size: 1.5rem;
-        }
-      }
-      .update-item {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-      }
-    }
-    .delete-item {
-      margin: 5px 20px 5px 40px;
-      font-size: 2rem;
-      cursor: pointer;
-      :hover {
-        color: red;
-      }
-    }
-  }
 
   @media (max-width: 600px) {
     margin-top: -35px;
@@ -259,21 +186,6 @@ const Wrapper = styled.div`
             margin-left: -10px;
             font-size: 1rem;
           }
-        }
-      }
-    }
-    .edit-item-section {
-      .edit-item {
-        .details {
-          .product-name {
-            font-size: 1.5rem;
-          }
-          .category-name {
-            font-size: 1rem;
-          }
-        }
-        .update-item {
-          margin-top: 65px;
         }
       }
     }
