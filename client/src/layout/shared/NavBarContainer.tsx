@@ -1,14 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+
 import { selectShowShoppingCart } from "../../redux/shopping-cart/selectors";
 import { ShoppingBar } from "../client-app/partials/ShoppingBar";
 import { SearchBar } from "../client-app/partials/SearchBar";
+import { useCheckout } from "../client-app/hooks/useCheckout";
 
 export const NavBarContainer = React.memo(function Component() {
   const showShoppingCart = useSelector(selectShowShoppingCart);
+  const { checkoutDelivery } = useCheckout();
+
   return (
-    <Wrapper showingCart={showShoppingCart}>
+    <Wrapper showingCart={showShoppingCart} checkoutDelivery={checkoutDelivery}>
       <div className="desktop-show-only">
         <ShoppingBar />
       </div>
@@ -21,9 +25,11 @@ export const NavBarContainer = React.memo(function Component() {
 
 interface Props {
   showingCart: boolean;
+  checkoutDelivery: boolean;
 }
 
 const Wrapper = styled.header<Props>`
+  display: ${({ checkoutDelivery }) => (checkoutDelivery ? "none" : "block")};
   position: sticky;
   top: 0;
   left: 0;

@@ -9,7 +9,6 @@ import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actio
 
 export const BackNavigationIcon = React.memo(function Component() {
   const history = useHistory();
-  console.log("history: ", history);
   const dispatch = useDispatch();
   const showShoppingChart = useSelector(selectShowShoppingCart);
 

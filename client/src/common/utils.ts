@@ -46,6 +46,14 @@ export const convertNumberToCurrency = (
   }
 };
 
+export function confirmEnding(base: string, target: string): boolean {
+  if (base.substr(-target.length) === target) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export function getPageNoQuery(): string {
   // Get full URL
   const currURL: string = window.location.href; // Get current address

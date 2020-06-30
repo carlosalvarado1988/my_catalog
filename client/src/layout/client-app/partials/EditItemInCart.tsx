@@ -3,7 +3,7 @@ import { DeleteFilled } from "@ant-design/icons";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Popconfirm, message } from "antd";
+import { Popconfirm } from "antd";
 
 import { AddProduct } from "../partials/AddProduct";
 import {

@@ -5,6 +5,7 @@ import { FindBusinessAccount } from "./client-app/pages/FindBusinessAccount";
 import { CategoryList } from "./client-app/pages/CategoryList";
 import { ProductsCategoryList } from "./client-app/pages/ProductsCategoryList";
 import { ProductDescription } from "./client-app/pages/ProductDescription";
+import { DeliveryOrder } from "./client-app/pages/DeliveryOrder";
 import { SignIn } from "./dashboard-app/pages/SignIn";
 import { NotFound } from "./shared/NotFound";
 import { CheckSlug } from "./client-app/HOC/CheckSlug";
@@ -42,6 +43,11 @@ export const Routes = () => {
           <CategoryList />
         </CheckSlug>
       </Route>
+      <Route exact path={"/:businessSlug/delivery"}>
+        <CheckSlug>
+          <DeliveryOrder />
+        </CheckSlug>
+      </Route>
       <Route exact path={"/:businessSlug/:categorySlug"}>
         <CheckSlug>
           <ProductsCategoryList />
@@ -52,6 +58,7 @@ export const Routes = () => {
           <ProductDescription />
         </CheckSlug>
       </Route>
+
       <Redirect to="/" />
     </Switch>
   );

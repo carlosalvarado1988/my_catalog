@@ -4,7 +4,6 @@ import { MutableStoreState } from "../root/reducer";
 
 import { getTotalAmountShoopingCart } from "../../common/utils";
 import { ShoppingCart, OrderItem } from "../../common/types/api/types";
-import { ActionStageEnum } from "../../common/types/api/enums.d";
 
 export const toogleShowShoopingCartActionReducer = (
   state: DeepReadonlyObject<MutableStoreState>
@@ -48,10 +47,7 @@ export const removeProductItemToShoppingCartActionReducer = (
       draft.shoppingCart.items || ([] as OrderItem[]),
       (i) => i.product_id !== payload
     ) as OrderItem[];
-    // draft.notification = {
-    //   show: true,
-    //   stage: ActionStageEnum.DONE,
-    //   message: "Producto eliminado",
-    //   description: "",
-    // };
+    draft.shoppingCart.amount = getTotalAmountShoopingCart(
+      draft.shoppingCart.items || []
+    );
   });
