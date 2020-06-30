@@ -28,10 +28,12 @@ import {
 import {
   toogleShowShoopingCartAction,
   addProductItemToShoppingCartAction,
+  removeProductItemToShoppingCartAction,
 } from "../shopping-cart/actions";
 import {
   toogleShowShoopingCartActionReducer,
   addProductItemToShoppingCartActionReducer,
+  removeProductItemToShoppingCartActionReducer,
 } from "../shopping-cart/reducers";
 
 import {
@@ -131,7 +133,10 @@ reducer.case(
   addProductItemToShoppingCartAction,
   addProductItemToShoppingCartActionReducer
 );
-
+reducer.case(
+  removeProductItemToShoppingCartAction,
+  removeProductItemToShoppingCartActionReducer
+);
 /**
  * Business reducers
  */

@@ -3,9 +3,13 @@ import { DeleteFilled } from "@ant-design/icons";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Popconfirm, message } from "antd";
 
 import { AddProduct } from "../partials/AddProduct";
-import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
+import {
+  toogleShowShoopingCartAction,
+  removeProductItemToShoppingCartAction,
+} from "../../../redux/shopping-cart/actions";
 
 interface EditItemProp {
   product_id: number;
@@ -26,9 +30,14 @@ export const EditItemInCart = React.memo(function Component({
   const dispatch = useDispatch();
 
   const goProduct = () => {
-    history.push(`${product_url}`);
+    history.push(product_url);
     dispatch(toogleShowShoopingCartAction());
   };
+
+  const removeItem = () => {
+    dispatch(removeProductItemToShoppingCartAction(Number(product_id)));
+  };
+
   return (
     <Wrapper>
       <div className="edit-item">
@@ -45,11 +54,15 @@ export const EditItemInCart = React.memo(function Component({
           />
         </div>
       </div>
-      <div
-        className="delete-item"
-        onClick={() => console.log("delete item action")}
-      >
-        <DeleteFilled />
+      <div className="delete-item">
+        <Popconfirm
+          title="Quieres borrar este producto?"
+          onConfirm={removeItem}
+          okText="Si"
+          cancelText="No"
+        >
+          <DeleteFilled />
+        </Popconfirm>
       </div>
     </Wrapper>
   );

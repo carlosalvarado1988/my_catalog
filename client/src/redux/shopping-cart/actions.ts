@@ -9,3 +9,7 @@ export const toogleShowShoopingCartAction = actionCreator(
 export const addProductItemToShoppingCartAction = actionCreator<OrderItem>(
   "ADD_PRODUCT_SHOPPING_CART"
 );
+
+export const removeProductItemToShoppingCartAction = actionCreator<number>(
+  "REMOVE_PRODUCT_SHOPPING_CART"
+);

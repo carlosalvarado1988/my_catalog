@@ -1,8 +1,10 @@
 import { produce } from "immer";
-import { findIndex } from "lodash";
+import { findIndex, filter } from "lodash";
 import { MutableStoreState } from "../root/reducer";
+
 import { getTotalAmountShoopingCart } from "../../common/utils";
 import { ShoppingCart, OrderItem } from "../../common/types/api/types";
+import { ActionStageEnum } from "../../common/types/api/enums.d";
 
 export const toogleShowShoopingCartActionReducer = (
   state: DeepReadonlyObject<MutableStoreState>
@@ -36,3 +38,20 @@ function upsertItemInShoppingCart(
   }
   shoppingCart.amount = getTotalAmountShoopingCart(shoppingCart.items || []);
 }
+
+export const removeProductItemToShoppingCartActionReducer = (
+  state: DeepReadonlyObject<MutableStoreState>,
+  payload: number
+) =>
+  produce(state, (draft: MutableStoreState) => {
+    draft.shoppingCart.items = filter(
+      draft.shoppingCart.items || ([] as OrderItem[]),
+      (i) => i.product_id !== payload
+    ) as OrderItem[];
+    // draft.notification = {
+    //   show: true,
+    //   stage: ActionStageEnum.DONE,
+    //   message: "Producto eliminado",
+    //   description: "",
+    // };
+  });
