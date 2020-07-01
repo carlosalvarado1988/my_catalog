@@ -1,17 +1,16 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
+// import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
+import { DeliveryCardDetails } from "../partials/DeliveryCardDetails";
+
 export const DeliveryOrder = React.memo(function Component() {
-  const history = useHistory();
   return (
     <Wrapper>
-      <div className="close-checkout">
-        <CloseOutlined onClick={() => history.goBack()} />
-      </div>
-      <h1>Orden de Entrega</h1>
-      <form className="grid-items-list">
+      <h1 className="page-title">Orden de Entrega</h1>
+      <DeliveryCardDetails />
+
+      {/* <form className="grid-items-list">
         <div className="grid-item">
           <CheckCircleTwoTone className="check-valid" twoToneColor="#52c41a" />
           <h4>Cliente:</h4>
@@ -68,37 +67,20 @@ export const DeliveryOrder = React.memo(function Component() {
             </select>
           </div>
         </div>
-      </form>
+      </form> */}
     </Wrapper>
   );
 });
 
 const Wrapper = styled.main`
-  .close-checkout {
-    cursor: pointer;
-    display: block;
-    width: 100%;
-    height: 30px;
-    padding: 20px 20px 20px 0;
-    margin: 10px 0;
-    font-size: 2rem;
-    :hover,
-    :focus {
-      opacity: 0.8;
-    }
-  }
   min-height: 100%;
-  padding: 10px 0;
+  padding-bottom: 30px;
   box-sizing: border-box;
   /* color: var(--text-color); */
   font-size: var(--text-size-web);
-  .grid-item {
-    > h2 {
-      margin: 0 0 5px;
-    }
-    > div {
-      display: block;
-    }
+
+  .page-title {
+    text-align: center;
   }
 
   .check-valid {
@@ -109,11 +91,6 @@ const Wrapper = styled.main`
 
   @media (max-width: 600px) {
     font-size: var(--text-size-mobile);
-    .close-checkout {
-      padding: 0;
-    }
-    .grid-items-list {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
+    padding-bottom: 10px;
   }
 `;

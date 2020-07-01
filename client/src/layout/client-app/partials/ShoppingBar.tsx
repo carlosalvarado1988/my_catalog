@@ -1,14 +1,13 @@
 import React from "react";
-import { Avatar } from "antd";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { UserOutlined } from "@ant-design/icons";
 
 import { AddProduct } from "../partials/AddProduct";
 import { SearchBar } from "../partials/SearchBar";
 import { ProceedCheckout } from "../partials/ProceedCheckout";
 import { ShoppingCartIcon } from "../partials/ShoppingCartIcon";
 import { BusinessName } from "../partials/BusinessName";
+import { UserAvatar } from "../partials/UserAvatar";
 import { useBusinessInventory } from "../hooks/useBusinessInventory";
 import { selectShowShoppingCart } from "../../../redux/shopping-cart/selectors";
 
@@ -36,7 +35,7 @@ export const ShoppingBar = React.memo(function Component() {
           />
         </div>
         <div className="mobile-show-only">
-          <Avatar icon={<UserOutlined />} />
+          <UserAvatar />
         </div>
       </div>
 
@@ -62,7 +61,7 @@ export const ShoppingBar = React.memo(function Component() {
           <ShoppingCartIcon />
         </div>
         <div className="desktop-show-only">
-          <Avatar icon={<UserOutlined />} />
+          <UserAvatar />
         </div>
       </div>
     </Wrapper>

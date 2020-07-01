@@ -3,20 +3,25 @@ import { Input } from "antd";
 import styled from "styled-components";
 
 import { BackNavigationIcon } from "./BackNavigationIcon";
+import { useCheckout } from "../hooks/useCheckout";
 
 const { Search } = Input;
 
 export const SearchBar = React.memo(function Component() {
+  const { checkoutDelivery } = useCheckout();
+
   return (
     <Wrapper>
       <div className="mobile-show-only">
-        <BackNavigationIcon />
+        <BackNavigationIcon checkoutDelivery={checkoutDelivery} />
       </div>
-      <Search
-        className="search-button"
-        placeholder="Search"
-        onSearch={(value) => console.log(value)}
-      />
+      {!checkoutDelivery && (
+        <Search
+          className="search-button"
+          placeholder="Search"
+          onSearch={(value) => console.log(value)}
+        />
+      )}
     </Wrapper>
   );
 });

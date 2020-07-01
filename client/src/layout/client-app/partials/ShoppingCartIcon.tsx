@@ -10,14 +10,17 @@ import {
   selectItemsCountShoppingCart,
 } from "../../../redux/shopping-cart/selectors";
 import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
+import { useCheckout } from "../hooks/useCheckout";
 
 export const ShoppingCartIcon = React.memo(function Component() {
   const dispatch = useDispatch();
+  const { checkoutDelivery } = useCheckout();
+
   const showShoppingCart = useSelector(selectShowShoppingCart);
   const isEmptyShoppingCart = useSelector(selectIsEmptyShoppingCart);
   const itemsCount = useSelector(selectItemsCountShoppingCart);
 
-  return (
+  return checkoutDelivery ? null : (
     <Wrapper onClick={() => dispatch(toogleShowShoopingCartAction())}>
       <StyledBadge count={showShoppingCart ? 0 : itemsCount}>
         {showShoppingCart ? (
