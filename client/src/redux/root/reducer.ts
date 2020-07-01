@@ -58,9 +58,14 @@ import {
   Business,
   Notification,
   ShoppingCart,
+  DeliveryOrder,
   NavigationTrack,
 } from "../../common/types/api/types.d";
-import { ActionStageEnum } from "../../common/types/api/enums.d";
+import {
+  ActionStageEnum,
+  DeliveryTypeEnum,
+  PaymentMethodEnum,
+} from "../../common/types/api/enums.d";
 
 /**
  * The root store state.
@@ -73,6 +78,7 @@ export interface MutableStoreState {
   shoppingCart: ShoppingCart;
   notification: Notification;
   business: Business;
+  deliveryOrder: DeliveryOrder;
   navigationTrack: NavigationTrack;
   error: any;
 }
@@ -89,6 +95,19 @@ const INITIAL_STATE: StoreState = produce(
       business_id: null,
       items: [],
       amount: 0,
+    },
+    deliveryOrder: {
+      business_id: null,
+      delivery_type: DeliveryTypeEnum.PICKUP,
+      date: "",
+      time: "",
+      address: "",
+      additional_reference: "",
+      customer: "",
+      phone: "",
+      items_cost: 0,
+      payment_type: PaymentMethodEnum.CASH,
+      total_pay: 0,
     },
     notification: {
       show: false,

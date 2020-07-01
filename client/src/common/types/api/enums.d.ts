@@ -4,6 +4,16 @@ export enum ActionStageEnum {
   FAILED = "FAILED",
 }
 
+export enum PaymentMethodEnum {
+  CASH = "CASH",
+  CREDIT_CARD = "CREDIT_CARD",
+}
+
+export enum DeliveryTypeEnum {
+  PICKUP = "PICKUP",
+  DELIVERY = "DELIVERY",
+}
+
 export enum PlanPriceEnum {
   INDI = "INDI",
   TEAM = "TEAM",
@@ -83,11 +93,11 @@ export enum CreditCardTypeEnum {
   JCB = "JCB",
 }
 
-export enum PaymentMethodModalTypeEnum {
-  LIST_METHODS = "LIST_METHODS",
-  EDIT_METHOD = "EDIT_METHOD",
-  ADD_METHOD = "ADD_METHOD",
-}
+// export enum PaymentMethodModalTypeEnum {
+//   LIST_METHODS = "LIST_METHODS",
+//   EDIT_METHOD = "EDIT_METHOD",
+//   ADD_METHOD = "ADD_METHOD",
+// }
 
 export enum CreditCardFormViewEnum {
   MODAL_VIEW = "MODAL_VIEW",

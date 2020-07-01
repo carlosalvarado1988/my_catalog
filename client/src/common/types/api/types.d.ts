@@ -8,6 +8,8 @@ import {
   PaymentMethodModalTypeEnum,
   PagesCollectionEnum,
   ActionStageEnum,
+  PaymentMethodEnum,
+  DeliveryTypeEnum,
 } from "./enums.d";
 
 /**
@@ -98,6 +100,19 @@ export type ShoppingCart = {
 export type NavigationTrack = {
   category_slug: string | null;
   product_id: string | null;
+};
+export type DeliveryOrder = {
+  business_id: number | null;
+  delivery_type: DeliveryTypeEnum;
+  date: string;
+  time: string;
+  address: string;
+  additional_reference?: string;
+  customer: string;
+  phone: string;
+  items_cost: number;
+  payment_type: PaymentMethodEnum;
+  total_pay: number;
 };
 // UI DATA MODELS
 export type Token = { jwt: string; expires: Timestamp };
