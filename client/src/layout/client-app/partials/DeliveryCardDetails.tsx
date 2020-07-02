@@ -1,10 +1,11 @@
 import React from "react";
 import moment, { Moment } from "moment";
 import { DatePicker, TimePicker, Input, Select } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-// import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+// import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
 
+import { useCheckout } from "../hooks/useCheckout";
 import { convertNumberToCurrency } from "../../../common/utils";
 
 import {
@@ -12,7 +13,6 @@ import {
   PaymentMethodEnum,
   CurrenciesEnum,
 } from "../../../common/types/api/enums.d";
-import { selectDeliveryOrder } from "../../../redux/delivery-order/selectors";
 import {
   changeDateAction,
   changeTimeAction,
@@ -20,6 +20,7 @@ import {
   changeAddionalReferenceAction,
   changeCustomerAction,
   changePhoneAction,
+  changeDeliveryTypeAction,
 } from "../../../redux/delivery-order/actions";
 
 const { TextArea } = Input;
@@ -37,7 +38,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
     phone,
     payment_method,
     items_cost,
-  } = useSelector(selectDeliveryOrder);
+    delivery_type_cost,
+    total_pay,
+  } = useCheckout();
+  console.log("total_pay: ", total_pay);
+
   function disabledDate(current: any) {
     // Can not select days before today and today
     return current && current.valueOf() === Date.now();
@@ -57,7 +62,10 @@ export const DeliveryCardDetails = React.memo(function Component() {
           <Select
             placeholder="Elegir"
             className="editable filled select"
-            value={delivery_type}
+            defaultValue={delivery_type}
+            onChange={(value: DeliveryTypeEnum) => {
+              dispatch(changeDeliveryTypeAction(value));
+            }}
           >
             <Option value={DeliveryTypeEnum.PICKUP}>Para llevar</Option>
             <Option value={DeliveryTypeEnum.DELIVERY}>Domicilio</Option>
@@ -65,7 +73,9 @@ export const DeliveryCardDetails = React.memo(function Component() {
         </div>
         <div className="delivery-cost">
           <div className="title">Costo</div>
-          <div>$0.00</div>
+          <div>
+            {convertNumberToCurrency(delivery_type_cost, CurrenciesEnum.USD)}
+          </div>
         </div>
       </div>
 
@@ -169,7 +179,7 @@ export const DeliveryCardDetails = React.memo(function Component() {
         </div>
         <div className="payment-total">
           <div className="title">Total a pagar</div>
-          <div>$21.25</div>
+          <div>{convertNumberToCurrency(total_pay, CurrenciesEnum.USD)}</div>
         </div>
       </div>
     </Wrapper>

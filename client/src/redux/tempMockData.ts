@@ -4,12 +4,14 @@ import {
   BusinessSettings,
   DeliveryZone,
   PickupSettings,
-  PickupDayAvailability,
+  DayAvailability,
+  DeliverySettings,
   Product,
 } from "../common/types/api/types.d";
+import { PaymentMethodEnum } from "../common/types/api/enums.d";
 
 // BASE OBJECT MODEL FOR AVAILABILITY
-const available_monday_to_saturday: PickupDayAvailability = {
+const available_monday_to_saturday: DayAvailability = {
   monday: {
     from: `9am`,
     to: `6pm`,
@@ -159,12 +161,20 @@ const delivery_zones: DeliveryZone[] = [
   },
 ];
 
+const delivery_settings: DeliverySettings = {
+  delivery_zones,
+  delivery_cost: 3,
+};
+
 // API make business_settings to bring details in one object
 const business_settings: BusinessSettings = {
   business_setting_id: 1,
   pickup_settings,
-  delivery_zones,
-  payment_option: "cash",
+  delivery_settings,
+  payment_methods_available: [
+    PaymentMethodEnum.CASH,
+    PaymentMethodEnum.CREDIT_CARD,
+  ],
   logo:
     "https://s3-us-west-2.amazonaws.com/analytico-prod/client_logos/Kleen-King-logo.jpg",
 };

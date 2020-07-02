@@ -31,16 +31,4 @@ export const setTotalPayDeliveryOrderAction = actionCreator<number>(
   "SET_TOTAL_PAY"
 );
 
-// business_id: null,
-// delivery_type: DeliveryTypeEnum.PICKUP,
-
-// date: "",
-// time: "",
-// address: "",
-// additional_reference: "",
-// customer: "",
-// phone: "",
-
-// payment_type: PaymentMethodEnum.CASH,
-// items_cost: 0,
-// total_pay: 0,
+export const setDeliveryTypeCostAction = actionCreator("SET_DELIVERY_COST");

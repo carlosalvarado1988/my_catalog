@@ -46,7 +46,7 @@ export type Category = {
   products: Product[];
 };
 
-export type PickupDayAvailability = {
+export type DayAvailability = {
   [day: string]: {
     from: string;
     to: string;
@@ -56,18 +56,23 @@ export type PickupDetails = {
   pickup_id: number;
   address: string;
   additional_reference?: string;
-  pickup_availability: PickupDayAvailability;
+  pickup_availability: DayAvailability;
 };
+
 export type PickupSettings = {
   [place: string]: PickupDetails;
 };
 
+export type DeliverySettings = {
+  delivery_zones: DeliveryZone[];
+  delivery_cost: number;
+};
 export type DeliveryZone = {};
 export type BusinessSettings = {
   business_setting_id: number;
   pickup_settings: PickupSettings;
-  delivery_zones: DeliveryZone[];
-  payment_option: string;
+  delivery_settings: DeliverySettings;
+  payment_methods_available: PaymentMethodEnum[];
   logo: string;
 };
 export type Business = {
@@ -111,6 +116,7 @@ export type DeliveryOrder = {
   customer: string;
   phone: string;
   items_cost: number;
+  delivery_type_cost: number;
   payment_method: PaymentMethodEnum;
   total_pay: number;
 };

@@ -12,6 +12,15 @@ export const changeDeliveryTypeActionReducer = (
 ) =>
   produce(state, (draft: MutableStoreState) => {
     draft.deliveryOrder.delivery_type = payload;
+    draft.deliveryOrder.total_pay = getTotalPay(
+      draft.business.business_settings?.delivery_settings.delivery_cost,
+      payload,
+      draft.deliveryOrder.items_cost
+    );
+    draft.deliveryOrder.delivery_type_cost = getDeliveryTypeCost(
+      payload,
+      draft.business.business_settings?.delivery_settings.delivery_cost
+    );
   });
 
 export const changeDateActionReducer = (
@@ -65,6 +74,11 @@ export const setItemsCostDeliveryOrderActionReducer = (
 ) =>
   produce(state, (draft: MutableStoreState) => {
     draft.deliveryOrder.items_cost = payload;
+    draft.deliveryOrder.total_pay = getTotalPay(
+      draft.business.business_settings?.delivery_settings.delivery_cost,
+      draft.deliveryOrder.delivery_type,
+      payload
+    );
   });
 
 export const changePaymentMethodTypeActionReducer = (
@@ -81,3 +95,36 @@ export const setTotalPayDeliveryOrderActionReducer = (
   produce(state, (draft: MutableStoreState) => {
     draft.deliveryOrder.total_pay = payload;
   });
+
+export const setDeliveryTypeCostActionReducer = (
+  state: DeepReadonlyObject<MutableStoreState>
+) =>
+  produce(state, (draft: MutableStoreState) => {
+    draft.deliveryOrder.delivery_type_cost = getDeliveryTypeCost(
+      draft.deliveryOrder.delivery_type,
+      draft.business.business_settings?.delivery_settings.delivery_cost
+    );
+  });
+
+function getTotalPay(
+  delivery_cost: number = 0,
+  delivery_type: DeliveryTypeEnum,
+  items_cost: number
+): number {
+  if (delivery_type === DeliveryTypeEnum.DELIVERY) {
+    return items_cost + delivery_cost;
+  } else {
+    return items_cost;
+  }
+}
+
+function getDeliveryTypeCost(
+  delivery_type: DeliveryTypeEnum,
+  delivery_cost: number = 0
+): number {
+  if (delivery_type === DeliveryTypeEnum.DELIVERY) {
+    return delivery_cost;
+  } else {
+    return 0;
+  }
+}

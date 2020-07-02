@@ -47,6 +47,7 @@ import {
   setItemsCostDeliveryOrderAction,
   changePaymentMethodTypeAction,
   setTotalPayDeliveryOrderAction,
+  setDeliveryTypeCostAction,
 } from "../delivery-order/actions";
 import {
   changeDeliveryTypeActionReducer,
@@ -59,6 +60,7 @@ import {
   setItemsCostDeliveryOrderActionReducer,
   changePaymentMethodTypeActionReducer,
   setTotalPayDeliveryOrderActionReducer,
+  setDeliveryTypeCostActionReducer,
 } from "../delivery-order/reducers";
 import {
   setNavigationTrackCategorySlugAction,
@@ -122,7 +124,8 @@ const INITIAL_STATE: StoreState = produce(
     },
     deliveryOrder: {
       business_id: null,
-      delivery_type: DeliveryTypeEnum.PICKUP,
+      delivery_type: DeliveryTypeEnum.DELIVERY,
+      delivery_type_cost: 0,
       date: null,
       time: null,
       address: "",
@@ -130,8 +133,8 @@ const INITIAL_STATE: StoreState = produce(
       customer: "",
       phone: "",
       items_cost: 0,
-      payment_method: PaymentMethodEnum.CASH,
       total_pay: 0,
+      payment_method: PaymentMethodEnum.CASH,
     },
     notification: {
       show: false,
@@ -206,6 +209,7 @@ reducer.case(
   setTotalPayDeliveryOrderAction,
   setTotalPayDeliveryOrderActionReducer
 );
+reducer.case(setDeliveryTypeCostAction, setDeliveryTypeCostActionReducer);
 
 /**
  * Business reducers
