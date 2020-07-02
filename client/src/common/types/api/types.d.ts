@@ -104,14 +104,14 @@ export type NavigationTrack = {
 export type DeliveryOrder = {
   business_id: number | null;
   delivery_type: DeliveryTypeEnum;
-  date: string;
-  time: string;
+  date: string | null;
+  time: string | null;
   address: string;
-  additional_reference?: string;
+  additional_reference: string;
   customer: string;
   phone: string;
   items_cost: number;
-  payment_type: PaymentMethodEnum;
+  payment_method: PaymentMethodEnum;
   total_pay: number;
 };
 // UI DATA MODELS

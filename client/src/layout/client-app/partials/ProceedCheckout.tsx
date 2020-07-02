@@ -9,12 +9,12 @@ import { selectAmountShoppingCart } from "../../../redux/shopping-cart/selectors
 import { convertNumberToCurrency } from "../../../common/utils";
 import { CurrenciesEnum } from "../../../common/types/api/enums.d";
 import { toogleShowShoopingCartAction } from "../../../redux/shopping-cart/actions";
+import { setItemsCostDeliveryOrderAction } from "../../../redux/delivery-order/actions";
 
 export const ProceedCheckout = React.memo(function Component() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { business_slug } = useBusinessInventory();
-  console.log("business_slug: ", business_slug);
   const amount = useSelector(selectAmountShoppingCart);
 
   return (
@@ -23,6 +23,7 @@ export const ProceedCheckout = React.memo(function Component() {
         className="button"
         type="primary"
         onClick={(e) => {
+          dispatch(setItemsCostDeliveryOrderAction(amount));
           history.push(`/${business_slug}/delivery`);
           dispatch(toogleShowShoopingCartAction());
           e.preventDefault();

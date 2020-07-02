@@ -37,6 +37,30 @@ import {
 } from "../shopping-cart/reducers";
 
 import {
+  changeDeliveryTypeAction,
+  changeDateAction,
+  changeTimeAction,
+  changeCustomerAction,
+  changePhoneAction,
+  changeAddressAction,
+  changeAddionalReferenceAction,
+  setItemsCostDeliveryOrderAction,
+  changePaymentMethodTypeAction,
+  setTotalPayDeliveryOrderAction,
+} from "../delivery-order/actions";
+import {
+  changeDeliveryTypeActionReducer,
+  changeDateActionReducer,
+  changeTimeActionReducer,
+  changeCustomerActionReducer,
+  changePhoneActionReducer,
+  changeAddressActionReducer,
+  changeAddionalReferenceActionReducer,
+  setItemsCostDeliveryOrderActionReducer,
+  changePaymentMethodTypeActionReducer,
+  setTotalPayDeliveryOrderActionReducer,
+} from "../delivery-order/reducers";
+import {
   setNavigationTrackCategorySlugAction,
   setNavigationTrackProductIdAction,
 } from "../navigation/actions";
@@ -99,14 +123,14 @@ const INITIAL_STATE: StoreState = produce(
     deliveryOrder: {
       business_id: null,
       delivery_type: DeliveryTypeEnum.PICKUP,
-      date: "",
-      time: "",
+      date: null,
+      time: null,
       address: "",
       additional_reference: "",
       customer: "",
       phone: "",
       items_cost: 0,
-      payment_type: PaymentMethodEnum.CASH,
+      payment_method: PaymentMethodEnum.CASH,
       total_pay: 0,
     },
     notification: {
@@ -156,6 +180,33 @@ reducer.case(
   removeProductItemToShoppingCartAction,
   removeProductItemToShoppingCartActionReducer
 );
+
+/**
+ * Deliver-order reducers
+ */
+reducer.case(changeDeliveryTypeAction, changeDeliveryTypeActionReducer);
+reducer.case(changeDateAction, changeDateActionReducer);
+reducer.case(changeTimeAction, changeTimeActionReducer);
+reducer.case(changeCustomerAction, changeCustomerActionReducer);
+reducer.case(changePhoneAction, changePhoneActionReducer);
+reducer.case(changeAddressAction, changeAddressActionReducer);
+reducer.case(
+  changeAddionalReferenceAction,
+  changeAddionalReferenceActionReducer
+);
+reducer.case(
+  setItemsCostDeliveryOrderAction,
+  setItemsCostDeliveryOrderActionReducer
+);
+reducer.case(
+  changePaymentMethodTypeAction,
+  changePaymentMethodTypeActionReducer
+);
+reducer.case(
+  setTotalPayDeliveryOrderAction,
+  setTotalPayDeliveryOrderActionReducer
+);
+
 /**
  * Business reducers
  */

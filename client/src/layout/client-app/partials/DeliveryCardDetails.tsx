@@ -1,24 +1,66 @@
 import React from "react";
+import moment, { Moment } from "moment";
 import { DatePicker, TimePicker, Input, Select } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+// import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
 import styled from "styled-components";
+
+import { convertNumberToCurrency } from "../../../common/utils";
+
+import {
+  DeliveryTypeEnum,
+  PaymentMethodEnum,
+  CurrenciesEnum,
+} from "../../../common/types/api/enums.d";
+import { selectDeliveryOrder } from "../../../redux/delivery-order/selectors";
+import {
+  changeDateAction,
+  changeTimeAction,
+  changeAddressAction,
+  changeAddionalReferenceAction,
+  changeCustomerAction,
+  changePhoneAction,
+} from "../../../redux/delivery-order/actions";
+
 const { TextArea } = Input;
 const { Option } = Select;
 
 export const DeliveryCardDetails = React.memo(function Component() {
+  const dispatch = useDispatch();
+  const {
+    delivery_type,
+    date,
+    time,
+    address,
+    additional_reference,
+    customer,
+    phone,
+    payment_method,
+    items_cost,
+  } = useSelector(selectDeliveryOrder);
   function disabledDate(current: any) {
     // Can not select days before today and today
     return current && current.valueOf() === Date.now();
   }
 
+  function parseDateTime(
+    date: string | null,
+    format: string
+  ): Moment | undefined {
+    return date ? moment(date, format) : undefined;
+  }
   return (
     <Wrapper>
       <div className="select-delivery-type">
         <div className="delivery">
           <div className="title">Forma de entrega</div>
-          <Select placeholder="Elegir" className="editable filled select">
-            <Option value="pickup">En sucursal</Option>
-            <Option value="delivery">Domicilio</Option>
-            <Option value="meeting">Punto de encuentro</Option>
+          <Select
+            placeholder="Elegir"
+            className="editable filled select"
+            value={delivery_type}
+          >
+            <Option value={DeliveryTypeEnum.PICKUP}>Para llevar</Option>
+            <Option value={DeliveryTypeEnum.DELIVERY}>Domicilio</Option>
           </Select>
         </div>
         <div className="delivery-cost">
@@ -35,7 +77,13 @@ export const DeliveryCardDetails = React.memo(function Component() {
               className="editable filled"
               placeholder="Eligir"
               format={`DD/MM/YYYY`}
+              showToday={false}
               disabledDate={disabledDate}
+              defaultValue={parseDateTime(date, `DD/MM/YYYY`)}
+              onChange={(value: any, dateString: string) => {
+                dispatch(changeDateAction(dateString));
+                return;
+              }}
             />
           </div>
           <div className="time">
@@ -46,6 +94,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
               format={`HH:mm`}
               minuteStep={15}
               use12Hours={true}
+              value={parseDateTime(time, `HH:mm`)}
+              onChange={(time: any, timeString) => {
+                dispatch(changeTimeAction(timeString));
+                return;
+              }}
             />
           </div>
         </div>
@@ -56,6 +109,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
             className="editable filled"
             placeholder="Direccion exacta"
             rows={2}
+            defaultValue={address}
+            onChange={(e) => {
+              dispatch(changeAddressAction(e.target.value));
+              e.preventDefault();
+            }}
           ></TextArea>
           <div className="additional-reference">
             <div className="title">Referencia adicional: (Opcional)</div>
@@ -63,6 +121,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
               className="editable filled"
               placeholder="Nos ayuda a ubicar el lugar mas facil"
               rows={4}
+              defaultValue={additional_reference}
+              onChange={(e) => {
+                dispatch(changeAddionalReferenceAction(e.target.value));
+                e.preventDefault();
+              }}
             ></TextArea>
           </div>
         </div>
@@ -74,22 +137,32 @@ export const DeliveryCardDetails = React.memo(function Component() {
           <Input
             className="editable filled"
             placeholder="Quien lo recibe"
+            defaultValue={customer}
+            onChange={(e) => {
+              dispatch(changeCustomerAction(e.target.value));
+              e.preventDefault();
+            }}
           ></Input>
           <div className="phone title">Telefono</div>
           <Input
             className="editable filled"
             placeholder="Donde nos comunicamos"
+            defaultValue={phone}
+            onChange={(e) => {
+              dispatch(changePhoneAction(e.target.value));
+              e.preventDefault();
+            }}
           ></Input>
         </div>
         <div className="cart-items">
           <div className="title">Costo por productos:</div>
-          <div>$21.25</div>
+          <div>{convertNumberToCurrency(items_cost, CurrenciesEnum.USD)}</div>
         </div>
         <div className="payment-method">
           <div className="title">Forma de pago</div>
-          <Select className="editable filled select" defaultValue="chash">
-            <Option value="chash">Efectivo</Option>
-            <Option value="credit-card" disabled>
+          <Select className="editable filled select" value={payment_method}>
+            <Option value={PaymentMethodEnum.CASH}>Efectivo</Option>
+            <Option value={PaymentMethodEnum.CREDIT_CARD} disabled>
               Tarjeta de credito
             </Option>
           </Select>
