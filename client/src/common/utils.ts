@@ -54,6 +54,9 @@ export function confirmEnding(base: string, target: string): boolean {
   }
 }
 
+export const valueIsNumeric = (value: string) =>
+  !isNaN(Number(value.slice(-1)));
+
 export function getPageNoQuery(): string {
   // Get full URL
   const currURL: string = window.location.href; // Get current address

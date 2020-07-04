@@ -1,12 +1,12 @@
 import React from "react";
 import moment, { Moment } from "moment";
-import { DatePicker, TimePicker, Input, Select } from "antd";
+import { DatePicker, TimePicker, Input, Select, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 // import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
 
 import { useCheckout } from "../hooks/useCheckout";
-import { convertNumberToCurrency } from "../../../common/utils";
+import { convertNumberToCurrency, valueIsNumeric } from "../../../common/utils";
 
 import {
   DeliveryTypeEnum,
@@ -41,7 +41,6 @@ export const DeliveryCardDetails = React.memo(function Component() {
     delivery_type_cost,
     total_pay,
   } = useCheckout();
-  console.log("total_pay: ", total_pay);
 
   function disabledDate(current: any) {
     // Can not select days before today and today
@@ -54,27 +53,68 @@ export const DeliveryCardDetails = React.memo(function Component() {
   ): Moment | undefined {
     return date ? moment(date, format) : undefined;
   }
+
   return (
     <Wrapper>
+      <div className="customer-section">
+        <div className="customer-name">
+          <div className="title">
+            <p>Cliente</p>
+          </div>
+          <Input
+            className="input editable filled"
+            placeholder="Quien lo recibe"
+            defaultValue={customer}
+            onChange={(e) => {
+              dispatch(changeCustomerAction(e.target.value));
+              e.preventDefault();
+            }}
+          ></Input>
+        </div>
+        <div className="customer-contact">
+          <div className="phone title">
+            <p>Telefono</p>
+          </div>
+          <Input
+            className="input editable filled"
+            placeholder="de contacto"
+            value={phone}
+            maxLength={8}
+            onChange={(e) => {
+              if (valueIsNumeric(e.target.value)) {
+                dispatch(changePhoneAction(e.target.value));
+              }
+              e.preventDefault();
+            }}
+          ></Input>
+        </div>
+      </div>
+
       <div className="select-delivery-type">
         <div className="delivery">
-          <div className="title">Forma de entrega</div>
+          <div className="title">
+            <p>Tipo de entrega</p>
+          </div>
           <Select
             placeholder="Elegir"
-            className="editable filled select"
+            className="input editable filled select"
             defaultValue={delivery_type}
             onChange={(value: DeliveryTypeEnum) => {
               dispatch(changeDeliveryTypeAction(value));
             }}
           >
-            <Option value={DeliveryTypeEnum.PICKUP}>Para llevar</Option>
+            <Option value={DeliveryTypeEnum.PICKUP}>Pasar a recoger</Option>
             <Option value={DeliveryTypeEnum.DELIVERY}>Domicilio</Option>
           </Select>
         </div>
         <div className="delivery-cost">
-          <div className="title">Costo</div>
+          <div className="title">
+            <p>Costo:</p>
+          </div>
           <div>
-            {convertNumberToCurrency(delivery_type_cost, CurrenciesEnum.USD)}
+            <p>
+              {convertNumberToCurrency(delivery_type_cost, CurrenciesEnum.USD)}
+            </p>
           </div>
         </div>
       </div>
@@ -82,9 +122,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
       <div className="delivery-option">
         <div className="date-time">
           <div className="date">
-            <div className="title">Fecha</div>
+            <div className="title">
+              <p>Fecha</p>
+            </div>
             <DatePicker
-              className="editable filled"
+              className="input editable filled"
               placeholder="Eligir"
               format={`DD/MM/YYYY`}
               showToday={false}
@@ -97,9 +139,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
             />
           </div>
           <div className="time">
-            <div className="title">Hora</div>
+            <div className="title">
+              <p>Hora</p>
+            </div>
             <TimePicker
-              className="editable filled"
+              className="input editable filled"
               placeholder="Eligir"
               format={`HH:mm`}
               minuteStep={15}
@@ -114,9 +158,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
         </div>
 
         <div className="address">
-          <div className="title">Direccion:</div>
+          <div className="title">
+            <p>Direccion:</p>
+          </div>
           <TextArea
-            className="editable filled"
+            className="input editable filled"
             placeholder="Direccion exacta"
             rows={2}
             defaultValue={address}
@@ -126,11 +172,13 @@ export const DeliveryCardDetails = React.memo(function Component() {
             }}
           ></TextArea>
           <div className="additional-reference">
-            <div className="title">Referencia adicional: (Opcional)</div>
+            <div className="title">
+              <p>Referencia adicional: (Opcional)</p>
+            </div>
             <TextArea
-              className="editable filled"
+              className="input editable filled"
               placeholder="Nos ayuda a ubicar el lugar mas facil"
-              rows={4}
+              rows={2}
               defaultValue={additional_reference}
               onChange={(e) => {
                 dispatch(changeAddionalReferenceAction(e.target.value));
@@ -141,45 +189,34 @@ export const DeliveryCardDetails = React.memo(function Component() {
         </div>
       </div>
 
-      <div className="payment-section">
-        <div className="customer">
-          <div className="title">Cliente</div>
-          <Input
-            className="editable filled"
-            placeholder="Quien lo recibe"
-            defaultValue={customer}
-            onChange={(e) => {
-              dispatch(changeCustomerAction(e.target.value));
-              e.preventDefault();
-            }}
-          ></Input>
-          <div className="phone title">Telefono</div>
-          <Input
-            className="editable filled"
-            placeholder="Donde nos comunicamos"
-            defaultValue={phone}
-            onChange={(e) => {
-              dispatch(changePhoneAction(e.target.value));
-              e.preventDefault();
-            }}
-          ></Input>
+      <div className="payment-method">
+        <div className="title">
+          <p>Forma de pago</p>
         </div>
+        <Select className="input editable filled select" value={payment_method}>
+          <Option value={PaymentMethodEnum.CASH}>Efectivo</Option>
+          <Option value={PaymentMethodEnum.CREDIT_CARD} disabled>
+            Tarjeta de credito
+          </Option>
+        </Select>
         <div className="cart-items">
-          <div className="title">Costo por productos:</div>
-          <div>{convertNumberToCurrency(items_cost, CurrenciesEnum.USD)}</div>
-        </div>
-        <div className="payment-method">
-          <div className="title">Forma de pago</div>
-          <Select className="editable filled select" value={payment_method}>
-            <Option value={PaymentMethodEnum.CASH}>Efectivo</Option>
-            <Option value={PaymentMethodEnum.CREDIT_CARD} disabled>
-              Tarjeta de credito
-            </Option>
-          </Select>
-        </div>
-        <div className="payment-total">
-          <div className="title">Total a pagar</div>
-          <div>{convertNumberToCurrency(total_pay, CurrenciesEnum.USD)}</div>
+          <Divider className="devider-line" plain />
+          <div className="row">
+            <p>Productos</p>
+            <p>{convertNumberToCurrency(items_cost, CurrenciesEnum.USD)}</p>
+          </div>
+          <div className="row">
+            <p>Envio</p>
+            <p>
+              {convertNumberToCurrency(delivery_type_cost, CurrenciesEnum.USD)}
+            </p>
+          </div>
+          <Divider className="devider-line" plain>
+            <p>
+              Total por pagar:{" "}
+              {convertNumberToCurrency(total_pay, CurrenciesEnum.USD)}
+            </p>
+          </Divider>
         </div>
       </div>
     </Wrapper>
@@ -194,14 +231,35 @@ const Wrapper = styled.div`
   .title {
     font-weight: bold;
   }
+  .input {
+    font-size: 1.8rem;
+  }
 
-  .select-delivery-type {
-    margin-bottom: 10px;
+  .customer-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid;
+    .customer-name {
+      padding: 10px;
+      width: 65%;
+      font-size: 1.8rem;
+    }
+    .customer-contact {
+      padding: 10px;
+      width: 35%;
+      font-size: 1.8rem;
+    }
+  }
+
+  .select-delivery-type {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid;
     .delivery {
       padding: 10px;
       .select {
@@ -214,9 +272,9 @@ const Wrapper = styled.div`
   }
 
   .delivery-option {
-    margin-bottom: 10px;
     border: 1px solid;
     border-radius: 5px;
+    margin-bottom: 20px;
     .date-time {
       display: flex;
       justify-content: space-between;
@@ -224,9 +282,17 @@ const Wrapper = styled.div`
         width: 50%;
         border-right: 1px solid;
         padding: 10px;
+        .title {
+          display: inline-block;
+          margin-right: 30px;
+        }
       }
       .time {
         padding: 10px;
+        .title {
+          display: inline-block;
+          margin-right: 30px;
+        }
       }
     }
     .address {
@@ -239,23 +305,28 @@ const Wrapper = styled.div`
     }
   }
 
-  .payment-section {
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid;
-    .customer {
-      padding: 10px;
+  .payment-method {
+    text-align: center;
+    .title {
+      margin-right: 10px;
+      display: inline-block;
     }
-    .cart-items,
-    .payment-method,
-    .payment-total {
-      padding: 10px;
-      border-top: 1px solid;
+    .select {
+      display: inline-block;
+      width: 200px;
+      border: 0;
     }
-  }
-
-  .payment-method .select {
-    width: 200px;
+    .cart-items {
+      width: 80%;
+      margin: 0 auto;
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+      .devider-line {
+        margin: 10px 0;
+      }
+    }
   }
 
   .editable {
@@ -269,8 +340,36 @@ const Wrapper = styled.div`
   @media (max-width: 600px) {
     width: 100%;
     font-size: 1.4rem;
-    .delivery-option .date {
-      width: 55%;
+    .input {
+      font-size: 1.4rem;
+    }
+    .customer-section {
+      display: block;
+      margin-bottom: 10px;
+      .customer-name,
+      .customer-contact {
+        width: 100%;
+        font-size: 1.4rem;
+      }
+    }
+    .select-delivery-type {
+      margin-bottom: 10px;
+    }
+    .delivery-option {
+      margin-bottom: 10px;
+      .date {
+        width: 55%;
+        .title {
+          display: block;
+          margin-right: unset;
+        }
+      }
+      .time {
+        .title {
+          display: block;
+          margin-right: unset;
+        }
+      }
     }
 
     .payment-method .select {

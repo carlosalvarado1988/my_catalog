@@ -52,7 +52,7 @@ const StyledCloseOutlined = styled(CloseOutlined)`
   ${baseIconSizes}
   @media (max-width: 600px) {
     position: fixed;
-    margin-top: 15px;
+    margin-top: -10px;
     left: 20px;
   }
 `;

@@ -6,7 +6,7 @@ import { DeliveryCardDetails } from "../partials/DeliveryCardDetails";
 export const DeliveryOrder = React.memo(function Component() {
   return (
     <Wrapper>
-      <h1 className="page-title">Orden de Entrega</h1>
+      {/* <h1 className="page-title">Orden de Entrega</h1> */}
       <DeliveryCardDetails />
     </Wrapper>
   );
@@ -14,7 +14,6 @@ export const DeliveryOrder = React.memo(function Component() {
 
 const Wrapper = styled.main`
   min-height: 100%;
-  padding-bottom: 30px;
   box-sizing: border-box;
   font-size: var(--text-size-web);
 
@@ -30,6 +29,6 @@ const Wrapper = styled.main`
 
   @media (max-width: 600px) {
     font-size: var(--text-size-mobile);
-    padding-bottom: 10px;
+    padding: 10px 0;
   }
 `;
