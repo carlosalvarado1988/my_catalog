@@ -3,7 +3,11 @@ import moment, { Moment } from "moment";
 import { DatePicker, TimePicker, Input, Select, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-// import { CheckCircleTwoTone, CloseOutlined } from "@ant-design/icons";
+import {
+  WhatsAppOutlined,
+  CheckCircleOutlined,
+  WarningOutlined,
+} from "@ant-design/icons";
 
 import { useCheckout } from "../hooks/useCheckout";
 import { convertNumberToCurrency, valueIsNumeric } from "../../../common/utils";
@@ -40,6 +44,8 @@ export const DeliveryCardDetails = React.memo(function Component() {
     items_cost,
     delivery_type_cost,
     total_pay,
+    valid_customer_details,
+    valid_delivery_details,
   } = useCheckout();
 
   function disabledDate(current: any) {
@@ -58,12 +64,19 @@ export const DeliveryCardDetails = React.memo(function Component() {
     <Wrapper>
       <div className="customer-section">
         <div className="customer-name">
+          {!valid_customer_details && (
+            <WarningOutlined className="check-icon red" />
+          )}
+          {valid_customer_details && (
+            <CheckCircleOutlined className="check-icon green" />
+          )}
+
           <div className="title">
             <p>Cliente</p>
           </div>
           <Input
             className="input editable filled"
-            placeholder="Quien lo recibe"
+            placeholder={`Quien lo recibe`}
             defaultValue={customer}
             onChange={(e) => {
               dispatch(changeCustomerAction(e.target.value));
@@ -73,7 +86,9 @@ export const DeliveryCardDetails = React.memo(function Component() {
         </div>
         <div className="customer-contact">
           <div className="phone title">
-            <p>Telefono</p>
+            <p>
+              Telefono <WhatsAppOutlined />
+            </p>
           </div>
           <Input
             className="input editable filled"
@@ -158,6 +173,13 @@ export const DeliveryCardDetails = React.memo(function Component() {
         </div>
 
         <div className="address">
+          {!valid_delivery_details && (
+            <WarningOutlined className="check-icon red" />
+          )}
+          {valid_delivery_details && (
+            <CheckCircleOutlined className="check-icon green" />
+          )}
+
           <div className="title">
             <p>Direccion:</p>
           </div>
@@ -200,6 +222,11 @@ export const DeliveryCardDetails = React.memo(function Component() {
           </Option>
         </Select>
         <div className="cart-items">
+          {items_cost === 0 && (
+            <div className="notification-message">
+              <h5>Tu carrito de compras esta vacio</h5>
+            </div>
+          )}
           <Divider className="devider-line" plain />
           <div className="row">
             <p>Productos</p>
@@ -228,6 +255,29 @@ const Wrapper = styled.div`
   margin: 0 auto;
   width: 70%;
   font-size: 2rem;
+  .notification-message {
+    text-align: center;
+    border: 5px solid red;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border-bottom: none;
+    margin: 15px 0;
+    h5 {
+      margin: 5px 0;
+    }
+  }
+  .check-icon {
+    float: right;
+    padding: 10px;
+    font-size: 3rem;
+    margin: auto;
+    &.red {
+      color: red;
+    }
+    &.green {
+      color: green;
+    }
+  }
   .title {
     font-weight: bold;
   }
@@ -236,19 +286,12 @@ const Wrapper = styled.div`
   }
 
   .customer-section {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid;
-    .customer-name {
-      padding: 10px;
-      width: 65%;
-      font-size: 1.8rem;
-    }
+    .customer-name,
     .customer-contact {
       padding: 10px;
-      width: 35%;
       font-size: 1.8rem;
     }
   }
@@ -288,6 +331,7 @@ const Wrapper = styled.div`
         }
       }
       .time {
+        width: 50%;
         padding: 10px;
         .title {
           display: inline-block;
@@ -340,6 +384,12 @@ const Wrapper = styled.div`
   @media (max-width: 600px) {
     width: 100%;
     font-size: 1.4rem;
+    ..notification-message {
+      margin: 10px 0;
+    }
+    .check-icon {
+      font-size: 1.5rem;
+    }
     .input {
       font-size: 1.4rem;
     }

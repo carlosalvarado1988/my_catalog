@@ -15,7 +15,9 @@ export const SearchBar = React.memo(function Component() {
       <div className="mobile-show-only">
         <BackNavigationIcon checkoutDelivery={checkoutDelivery} />
       </div>
-      {checkoutDelivery && <h3 className="checkout-title">Orden de Entrega</h3>}
+      {checkoutDelivery && (
+        <h3 className="checkout-title">Solicitar Entrega</h3>
+      )}
       {!checkoutDelivery && (
         <Search
           className="search-button"

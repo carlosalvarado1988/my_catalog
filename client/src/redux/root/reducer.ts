@@ -48,6 +48,7 @@ import {
   changePaymentMethodTypeAction,
   setTotalPayDeliveryOrderAction,
   setDeliveryTypeCostAction,
+  submitOrderAction,
 } from "../delivery-order/actions";
 import {
   changeDeliveryTypeActionReducer,
@@ -61,6 +62,9 @@ import {
   changePaymentMethodTypeActionReducer,
   setTotalPayDeliveryOrderActionReducer,
   setDeliveryTypeCostActionReducer,
+  submitOrderActionReducerStart,
+  submitOrderActionReducerDone,
+  submitOrderActionReducerFailed,
 } from "../delivery-order/reducers";
 import {
   setNavigationTrackCategorySlugAction,
@@ -210,6 +214,10 @@ reducer.case(
   setTotalPayDeliveryOrderActionReducer
 );
 reducer.case(setDeliveryTypeCostAction, setDeliveryTypeCostActionReducer);
+
+reducer.case(submitOrderAction.started, submitOrderActionReducerStart);
+reducer.case(submitOrderAction.done, submitOrderActionReducerDone);
+reducer.case(submitOrderAction.failed, submitOrderActionReducerFailed);
 
 /**
  * Business reducers

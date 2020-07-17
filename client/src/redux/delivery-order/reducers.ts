@@ -1,9 +1,14 @@
 import { produce } from "immer";
 import { MutableStoreState } from "../root/reducer";
+import { Failure, Success } from "typescript-fsa";
+
 import {
   DeliveryTypeEnum,
   PaymentMethodEnum,
+  ActionStageEnum,
 } from "../../common/types/api/enums.d";
+import { DeliveryOrder } from "../../common/types/api/types.d";
+
 // import { getTotalAmountShoopingCart } from "../../common/utils";
 
 export const changeDeliveryTypeActionReducer = (
@@ -104,6 +109,50 @@ export const setDeliveryTypeCostActionReducer = (
       draft.deliveryOrder.delivery_type,
       draft.business.business_settings?.delivery_settings.delivery_cost
     );
+  });
+
+export const submitOrderActionReducerStart = (
+  state: DeepReadonlyObject<MutableStoreState>,
+  payload: DeliveryOrder
+) =>
+  produce(state, (draft: MutableStoreState) => {
+    draft.loading = true;
+    draft.notification = {
+      show: true,
+      closeUntilResponse: true,
+      stage: ActionStageEnum.STARTED,
+      message: "Su orden esta siendo envianda",
+      description: "por favor, espere ...",
+    };
+  });
+
+export const submitOrderActionReducerDone = (
+  state: DeepReadonlyObject<MutableStoreState>,
+  payload: Success<DeliveryOrder, any>
+) =>
+  produce(state, (draft: MutableStoreState) => {
+    draft.loading = false;
+    draft.notification = {
+      show: true,
+      closeUntilResponse: true,
+      stage: ActionStageEnum.DONE,
+      message: "Su orden se envio con exito",
+      description: `${draft.business.name} se comunicara con ud en breve si surge alguna duda.`,
+    };
+  });
+
+export const submitOrderActionReducerFailed = (
+  state: DeepReadonlyObject<MutableStoreState>,
+  payload: Failure<any, ErrorEvent>
+) =>
+  produce(state, (draft: MutableStoreState) => {
+    draft.notification = {
+      show: true,
+      closeUntilResponse: true,
+      stage: ActionStageEnum.FAILED,
+      message: "Algo fallo en la red",
+      description: `por favor, verifique su informacion e intente de nuevo, o llame directamente al: ${draft.business.phone}`,
+    };
   });
 
 function getTotalPay(

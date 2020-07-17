@@ -186,6 +186,7 @@ export const business_account: Business = {
   slug: "baboom-life",
   address: "Residencial cumbres de santa tecla casa #20, pasaje 10, pol i-2",
   additional_reference: "frente a parque san jose",
+  phone: "2235-4123",
   description: "Somos una empresa de decoracion de interiores",
   date_created: "2020-06-08 20:02:32",
   date_modified: null,

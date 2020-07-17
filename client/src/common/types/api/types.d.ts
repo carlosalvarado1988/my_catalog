@@ -81,6 +81,7 @@ export type Business = {
   slug: string;
   address: string;
   additional_reference: string;
+  phone: string;
   description: string;
   date_created: Timestamp;
   date_modified: Timestamp | null;

@@ -1,8 +1,9 @@
-import actionCreatorFactory from "typescript-fsa";
+import actionCreatorFactory, { Action } from "typescript-fsa";
 import {
   DeliveryTypeEnum,
   PaymentMethodEnum,
 } from "../../common/types/api/enums.d";
+import { DeliveryOrder } from "../../common/types/api/types.d";
 
 const actionCreator = actionCreatorFactory("Delivery-order");
 
@@ -32,3 +33,10 @@ export const setTotalPayDeliveryOrderAction = actionCreator<number>(
 );
 
 export const setDeliveryTypeCostAction = actionCreator("SET_DELIVERY_COST");
+
+export const submitOrderAction = actionCreator.async<
+  DeliveryOrder,
+  any,
+  ErrorEvent
+>("SUBMIT_ORDER");
+export type SubmitOrderActionType = Action<DeliveryOrder>;
