@@ -4,6 +4,7 @@ exports.up = (knex) =>
   knex.schema.alterTable(tableName, (t) => {
     t.string("first_name", 200);
     t.string("last_name", 200);
+    t.string("password", 255).alter();
   });
 
 exports.down = (knex) =>

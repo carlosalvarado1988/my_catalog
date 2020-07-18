@@ -609,14 +609,14 @@ COMMIT;
 -- FUNCTION: public.update_last_modified()
 -- DROP FUNCTION public.update_last_modified();
 
-CREATE FUNCTION public.update_last_modified()
+CREATE FUNCTION public.update_last_date_modified()
     RETURNS trigger
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE NOT LEAKPROOF
 AS $BODY$
 BEGIN
-NEW.last_modified = now();
+NEW.date_modified = now();
 RETURN NEW;
 END;
 $BODY$;
@@ -626,16 +626,16 @@ ALTER FUNCTION public.update_last_modified()
 
 
 CREATE TRIGGER clients_BEFORE_UPDATE BEFORE UPDATE ON clients FOR EACH ROW
-EXECUTE PROCEDURE public.update_last_modified();
+EXECUTE PROCEDURE public.update_last_date_modified();
 
 CREATE TRIGGER users_BEFORE_UPDATE BEFORE UPDATE ON users FOR EACH ROW
-EXECUTE PROCEDURE public.update_last_modified();
+EXECUTE PROCEDURE public.update_last_date_modified();
 
 CREATE TRIGGER orders_BEFORE_UPDATE BEFORE UPDATE ON orders FOR EACH ROW
-EXECUTE PROCEDURE public.update_last_modified();
+EXECUTE PROCEDURE public.update_last_date_modified();
 
 CREATE TRIGGER delivery_orders_BEFORE_UPDATE BEFORE UPDATE ON delivery_orders FOR EACH ROW
-EXECUTE PROCEDURE public.update_last_modified();
+EXECUTE PROCEDURE public.update_last_date_modified();
 
 CREATE TRIGGER subscriptions_BEFORE_UPDATE BEFORE UPDATE ON subscriptions FOR EACH ROW
-EXECUTE PROCEDURE public.update_last_modified();
+EXECUTE PROCEDURE public.update_last_date_modified();
